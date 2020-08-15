@@ -1,8 +1,11 @@
 import React from "react";
+import Upcoming from "../components/upcoming/upcoming";
 
 function Home() {
     return (
-        <h2>Welcome</h2>
+        <div>
+        <Upcoming />
+        </div>
     )
 }
 

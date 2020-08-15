@@ -1,10 +1,11 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { auth } from "./firebase";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Nav/nav";
 import Home from "./pages/home";
 import Login from "./pages/login";
 import SignUp from "./pages/signup";
+import Profile from "./pages/profile";
 
 function App() {
   const [userState, setUserState] = useState({
@@ -12,7 +13,7 @@ function App() {
   });
 
   useEffect(() => {
-    auth.onAuthStateChanged( userAuth => {
+    auth.onAuthStateChanged(userAuth => {
       setUserState({ ...userState, user: userAuth });
     });
   }, [])
@@ -20,13 +21,17 @@ function App() {
   return (
     <Router>
       <div className="container-fluid">
-        <Navbar /> 
+        <Navbar />
         {userState.user ?
-          <Home />
+        <div>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/profile" component={Profile} />   
+          </div> 
         :
           <div>
-              <Route exact path={["/","/login"]} component={Login} />
-              <Route exact path="/signup" component={SignUp} />
+            <Route exact path={["/", "/login"]} component={Login} />
+            <Route exact path="/signup" component={SignUp} />
+
           </div>
         }
       </div>

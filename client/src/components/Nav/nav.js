@@ -1,18 +1,17 @@
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
+import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
+
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Link, useLocation } from "react-router-dom";
-import './nav.css';
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,7 +68,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 export default function SearchAppBar() {
   const classes = useStyles();
 
@@ -98,27 +96,27 @@ export default function SearchAppBar() {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-          <a href="/profile">
-            <MenuItem onClick={handleClose} >Profile</MenuItem>
+            <a href="/profile">
+              <MenuItem onClick={handleClose} >Profile</MenuItem>
             </a>
-            
-            <MenuItem 
-                containerElement={<Link to="/login" />}
-              onClick={handleClose}>Logout</MenuItem>
-           
-          </Menu>
 
-          <Link to="/">
-            <Typography className={classes.title} variant="h6" noWrap>
-              Playdatery
+            <MenuItem
+              containerElement={<Link to="/login" />}
+              onClick={handleClose}>Logout</MenuItem>
+
+          </Menu>
+          
+         
+          <Typography className={classes.title} variant="h6" noWrap>
+          <a href="/" style={{ textDecoration: 'none', color: 'white', }}> Play-datery </a>
           </Typography>
-          </Link>
+         
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
             <InputBase
-              placeholder="Activity Search"
+              placeholder="Search Activity"
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
@@ -128,6 +126,6 @@ export default function SearchAppBar() {
           </div>
         </Toolbar>
       </AppBar>
-    </div >
+    </div>
   );
 }

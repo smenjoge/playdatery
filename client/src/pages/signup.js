@@ -36,10 +36,18 @@ function SignUp() {
   }
 
   function saveNewUser() {
+    // let addressobj = {
+    //   city: city,
+    //   state: state,
+    //   zip: zip
+    // }
+
       let newUser = {
         emailID: email,
         password: password,
         displayName: displayName
+      //   image: image,
+      // address: addressobj
       }
       API.createNewUser(newUser);
   }

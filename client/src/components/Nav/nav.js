@@ -12,7 +12,6 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Link, useLocation } from "react-router-dom";
-import './nav.css';
 import UserContext from "../../utils/userContext";
 
 
@@ -81,6 +80,11 @@ export default function SearchAppBar() {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleCloseSignOut = () => {
+    handleClose();
+    userSignOut();
+  };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -106,22 +110,19 @@ export default function SearchAppBar() {
                   <MenuItem onClick={handleClose} >Profile</MenuItem>
                 </a>
 
-                <MenuItem
-                  containerElement={<Link to="/login" />}
-                  onClick={() => userSignOut()}>Logout
-                </MenuItem>
+                <a href="/login">
+                  <MenuItem onClick={handleCloseSignOut} >Logout</MenuItem>
+                </a>
               </div>
               :
               <div>
-                <MenuItem
-                  containerElement={<Link to="/login" />}
-                  onClick={handleClose}>Log In
-                </MenuItem>
+                 <a href="/login">
+                  <MenuItem onClick={handleClose} >Log In</MenuItem>
+                </a>
 
-                <MenuItem
-                  containerElement={<Link to="/signup" />}
-                  onClick={handleClose}>Sign Up
-                </MenuItem>
+                <a href="/signup">
+                  <MenuItem onClick={handleClose} >Sign Up</MenuItem>
+                </a>
               </div>
             }
           </Menu>

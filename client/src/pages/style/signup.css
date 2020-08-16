@@ -1,0 +1,28 @@
+.container {
+   text-align: center;
+}
+
+.dropzone {
+    border: dashed black;
+    margin-top: 25px;
+    width: 400px;
+}
+
+.thumbsContainer {
+    display: 'flex';
+    flex-direction: 'row';
+    flex-wrap: 'wrap';
+    margin-top: 16px;
+}
+
+.thumbInner  {
+    display: 'flex';
+    min-width: 0;
+    overflow: 'hidden';
+}
+
+img {
+    display: block;
+    width: auto;
+    height: 100%;
+}

@@ -1,13 +1,53 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const statesArray = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"];
 
-const userSchema = new Schema({
-  emailID: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  displayName: { type: String }
+const UserSchema = new Schema({
+  // Uid from firebase
+  uid: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  displayName: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  image: { type: String },
+  address: {
+    city: { type: String, trim: true },
+    state: {
+      type: String,
+      uppercase: true,
+      required: true,
+      enum: statesArray
+    },
+    zip: { type: Number, trim: true },
+  },
+  child: [{
+    firstName:
+    {
+      type: String,
+      required: true,
+      trim: true
+    },
+    lastName: {
+      type: String,
+      required: true,
+      trim: true
+    },
+    age: {
+      type: Number,
+      required: true,
+      trim: true
+    },
+    image: { type: String }
+  }],
+  date: { type: Date, default: Date.now }
 });
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model("User", UserSchema);
 
 module.exports = User;

@@ -28,23 +28,22 @@ function SignUp() {
   function handleBtnSubmit (event) {
     event.preventDefault();
     auth.createUserWithEmailAndPassword( email, password)
-      .then(() => saveNewUser())
+      .then((userAuth) => saveNewUser(userAuth))
       .catch(error => {
         console.error("Error signing up with email and password", error);
       }
     )
   }
 
-  function saveNewUser() {
-    // let addressobj = {
-    //   city: city,
-    //   state: state,
-    //   zip: zip
-    // }
-
+  function saveNewUser(userAuth) {
+      // let addressobj = {
+      //   city: city,
+      //   state: state,
+      //   zip: zip
+      // }
       let newUser = {
+        uid: userAuth.user.uid,
         emailID: email,
-        password: password,
         displayName: displayName
       //   image: image,
       // address: addressobj

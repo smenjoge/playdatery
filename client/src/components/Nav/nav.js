@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -12,6 +12,8 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Link, useLocation } from "react-router-dom";
+import UserContext from "../../utils/userContext";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,12 +71,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SearchAppBar() {
+  const { user, userSignOut } = useContext(UserContext);
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleCloseSignOut = () => {
+    handleClose();
+    userSignOut();
   };
 
   const handleClose = () => {
@@ -96,21 +104,32 @@ export default function SearchAppBar() {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <a href="/profile">
-              <MenuItem onClick={handleClose} >Profile</MenuItem>
-            </a>
+            {user ?
+              <div>
+                <a href="/profile">
+                  <MenuItem onClick={handleClose} >Profile</MenuItem>
+                </a>
 
-            <MenuItem
-              containerElement={<Link to="/login" />}
-              onClick={handleClose}>Logout</MenuItem>
+                <a href="/login">
+                  <MenuItem onClick={handleCloseSignOut} >Logout</MenuItem>
+                </a>
+              </div>
+              :
+              <div>
+                 <a href="/login">
+                  <MenuItem onClick={handleClose} >Log In</MenuItem>
+                </a>
 
+                <a href="/signup">
+                  <MenuItem onClick={handleClose} >Sign Up</MenuItem>
+                </a>
+              </div>
+            }
           </Menu>
-          
-         
           <Typography className={classes.title} variant="h6" noWrap>
-          <a href="/" style={{ textDecoration: 'none', color: 'white', }}> Play-datery </a>
+            <a href="/" style={{ textDecoration: 'none', color: 'white', }}> Play-datery </a>
           </Typography>
-         
+
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />

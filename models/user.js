@@ -21,7 +21,7 @@ const UserSchema = new Schema({
     state: {
       type: String,
       uppercase: true,
-      required: true,
+      // required: true,
       enum: statesArray
     },
     zip: { type: Number, trim: true },

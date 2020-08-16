@@ -35,17 +35,12 @@ function SignUp() {
     )
   }
 
-<<<<<<< Updated upstream
-  function saveNewUser() {
-    // let addressobj = {
-    //   city: city,
-    //   state: state,
-    //   zip: zip
-    // }
-
-=======
   function saveNewUser(userAuth) {
->>>>>>> Stashed changes
+      // let addressobj = {
+      //   city: city,
+      //   state: state,
+      //   zip: zip
+      // }
       let newUser = {
         uid: userAuth.user.uid,
         emailID: email,

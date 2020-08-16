@@ -28,13 +28,14 @@ function SignUp() {
   function handleBtnSubmit (event) {
     event.preventDefault();
     auth.createUserWithEmailAndPassword( email, password)
-      .then(() => saveNewUser())
+      .then((userAuth) => saveNewUser(userAuth))
       .catch(error => {
         console.error("Error signing up with email and password", error);
       }
     )
   }
 
+<<<<<<< Updated upstream
   function saveNewUser() {
     // let addressobj = {
     //   city: city,
@@ -42,9 +43,12 @@ function SignUp() {
     //   zip: zip
     // }
 
+=======
+  function saveNewUser(userAuth) {
+>>>>>>> Stashed changes
       let newUser = {
+        uid: userAuth.user.uid,
         emailID: email,
-        password: password,
         displayName: displayName
       //   image: image,
       // address: addressobj

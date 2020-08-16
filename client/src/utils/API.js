@@ -5,11 +5,11 @@ export default {
     // findBooks: function(bookName) {
     //     return axios.get("/api/books/find/" + bookName); 
     // },
-    // // Get all saved books from database
-    // getSavedBooks: function() {
-    //     return axios.get("/api/books");
-    // },
-    // Saved a book to the database
+    // Get saved User from database
+    getSavedUser: function(uid) {
+        return axios.get("/api/users/" + uid);
+    },
+    // Save a User to the database
     createNewUser: function(user) {
         return axios.post("/api/users", user);
     }

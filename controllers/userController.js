@@ -10,26 +10,24 @@ module.exports = {
     //     res.json(response.data.items);
     // },
     findOne: function(req, res) {
-        console.log(`Getting User from DB`, req.params.userId);
         db.User
         .findOne({uid: req.params.userId})
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
     },
     create: function(req, res) {
-        console.log(`Saving User to DB`, req.body);
         db.User
         .create(req.body)
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
-    },
+    }
     // findById: function(req, res) {
     //     db.User
     //       .findById(req.params.id)
     //       .then(dbModel => res.json(dbModel))
     //       .catch(err => res.status(422).json(err));
     //   },
-    // update: function(req, res) {
+    // addChild: function(req, res) {
     //     db.User
     //       .findOneAndUpdate({ _id: req.params.id }, req.body)
     //       .then(dbModel => res.json(dbModel))

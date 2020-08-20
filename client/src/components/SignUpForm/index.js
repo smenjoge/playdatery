@@ -26,7 +26,6 @@ function SignUpForm(props) {
         <form className={classes.root} noValidate autoComplete="off">
             <div>
                 <TextField
-                    id="outlined-size"
                     label="Name"
                     variant="outlined"
                     size="small"
@@ -34,7 +33,6 @@ function SignUpForm(props) {
                     value={displayName}
                     onChange={handleInputChange} />
                 <TextField
-                    id="outlined-size"
                     label="Email"
                     variant="outlined"
                     size="small"
@@ -44,18 +42,18 @@ function SignUpForm(props) {
             </div>
             <div>
                 <TextField
-                    id="outlined-size"
                     label="Password"
                     variant="outlined"
                     size="small"
+                    type="password"
                     name="password"
                     value={password}
                     onChange={handleInputChange} />
                 <TextField
-                    id="outlined-size"
                     label="Confirm password"
                     variant="outlined"
                     size="small"
+                    type="password"
                     name="password2"
                     value={password2}
                     onChange={handleInputChange} />

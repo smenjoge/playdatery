@@ -17,4 +17,11 @@ router.route("/")
 //   .put(userController.update)
 //   .delete(userController.remove);
 
+// app.use('/api/task/:id', async (req, res) => {
+//   // req.body will equal to { title: 'A new title' }
+//   const { id } = req.params
+//   await Task.update({ ...req.body }).where({ id })
+//   res.send('OK')
+// })
+
 module.exports = router;

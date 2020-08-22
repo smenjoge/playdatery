@@ -6,16 +6,19 @@ export default {
     //     return axios.get("/api/books/find/" + bookName); 
     // },
     // Get saved User from database
-    getSavedUser: function(uid) {
+    getSavedUser: function (uid) {
         return axios.get("/api/users/" + uid);
     },
     // Save a User to the database
-    createNewUser: function(user) {
+    createNewUser: function (user) {
         return axios.post("/api/users", user);
+    },
+    // Update a user to the database
+    updateUser: function (updateUser) {
+        return axios.post("/api/users/", updateUser);
+    },
+    // Delete a user from the database
+    deleteUser: function (uid) {
+        return axios.delete("/api/users/" + uid);
     }
-    // ,
-    // // Delete a book from the database
-    // deleteBook: function(id) {
-    //     return axios.delete("/api/books/" + id);
-    // }
 }

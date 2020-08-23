@@ -1,8 +1,11 @@
 import React from "react";
 
 const UserContext = React.createContext({ 
-    user: null,
-    userSignOut: () => undefined
+    userState: {
+        user: null,
+        userSignOut: () => undefined
+    },
+    setUserState: () => {}
 });
 
 export default UserContext;

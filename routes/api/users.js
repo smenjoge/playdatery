@@ -6,7 +6,7 @@ router.route("/:userId")
   .get(userController.findOne) // Get User info to display on Profile Page
   .put(userController.updateUser) // Update user info
 
-// Matches with "/api/users/child"
+// Matches with "/api/users/:userId/child"
 router
   .route("/:userId/child")
   .post(userController.addChild) // Add child to user document
@@ -16,12 +16,5 @@ router
 // Matches with "/api/users"
 router.route("/")
   .post(userController.create) // Save a new user to the database
-
-// app.use('/api/task/:id', async (req, res) => {
-//   // req.body will equal to { title: 'A new title' }
-//   const { id } = req.params
-//   await Task.update({ ...req.body }).where({ id })
-//   res.send('OK')
-// })
 
 module.exports = router;

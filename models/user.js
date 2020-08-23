@@ -24,27 +24,14 @@ const UserSchema = new Schema({
       // required: true,
       enum: statesArray
     },
-    zip: { type: Number, trim: true },
+    zip: { type: String, trim: true },
   },
-  child: [{
-    firstName:
+  children: [
     {
-      type: String,
-      required: true,
-      trim: true
-    },
-    lastName: {
-      type: String,
-      required: true,
-      trim: true
-    },
-    age: {
-      type: Number,
-      required: true,
-      trim: true
-    },
-    image: { type: String }
-  }],
+      type: Schema.Types.ObjectId,
+      ref: "Child"
+    }
+  ],
   date: { type: Date, default: Date.now }
 });
 

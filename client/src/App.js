@@ -16,6 +16,8 @@ function App() {
     userSignOut: () => auth.signOut()
   });
 
+  const contextValue = {userState, setUserState};
+
   useEffect(() => {
     auth.onAuthStateChanged(userAuth => {
        if (userAuth) {
@@ -33,7 +35,7 @@ function App() {
   }, [])
 
   return (
-    <UserContext.Provider value={userState}>
+    <UserContext.Provider value={contextValue}>
       <Router>
         <Navbar />
         {!userState.user ?

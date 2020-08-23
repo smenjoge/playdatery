@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchAppBar() {
+function SearchAppBar() {
   const {userState} = useContext(UserContext);
   const { user, userSignOut } = userState;
   const classes = useStyles();
@@ -153,3 +153,5 @@ export default function SearchAppBar() {
     </div>
   );
 }
+
+export default SearchAppBar;

@@ -23,6 +23,7 @@
     "firebase": "^7.17.2",
     "if-env": "^1.0.4",
     "mongoose": "^5.9.29",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "riek": "^1.1.0"
   }
 }

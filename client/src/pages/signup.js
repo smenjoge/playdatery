@@ -129,7 +129,7 @@ function SignUp() {
         <ul>{fileRejectionItems}</ul> */}
         </aside>
         <SignUpForm
-          email={email}
+          emailID={email}
           password={password}
           password2={password2}
           displayName={displayName}

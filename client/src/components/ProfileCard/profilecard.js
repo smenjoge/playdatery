@@ -26,7 +26,8 @@ const useStyles = makeStyles({
 });
 
 function profileCard({updateUser, handleEdit}) {
-    const { user } = useContext(UserContext);
+    const {userState} = useContext(UserContext);
+    const { user } = userState;
     const classes = useStyles();
 
     return (

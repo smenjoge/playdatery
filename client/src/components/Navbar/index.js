@@ -70,8 +70,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchAppBar() {
-  const { user, userSignOut } = useContext(UserContext);
+function SearchAppBar() {
+  const {userState} = useContext(UserContext);
+  const { user, userSignOut } = userState;
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -152,3 +153,5 @@ export default function SearchAppBar() {
     </div>
   );
 }
+
+export default SearchAppBar;

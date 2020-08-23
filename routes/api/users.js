@@ -1,27 +1,20 @@
 const router = require("express").Router();
 const userController = require("../../controllers/userController");
 
-// // Matches with "/api/users/:user"
+// // Matches with "/api/users/:userId"
 router.route("/:userId")
-  .get(userController.findOne)
+  .get(userController.findOne) // Get User info to display on Profile Page
+  .put(userController.updateUser) // Update user info
+
+// Matches with "/api/users/:userId/child"
+router
+  .route("/:userId/child")
+  .post(userController.addChild) // Add child to user document
+  .delete(userController.removeChild) // remove child from user document
+  .put(userController.updateChild) // Update child document
 
 // Matches with "/api/users"
 router.route("/")
-//   .get(userController.findAll)
-  .post(userController.create);
-
-// Matches with "/api/users/:id"
-// router
-//   .route("/:id")
-//   .get(userController.findById)
-//   .put(userController.update)
-//   .delete(userController.remove);
-
-// app.use('/api/task/:id', async (req, res) => {
-//   // req.body will equal to { title: 'A new title' }
-//   const { id } = req.params
-//   await Task.update({ ...req.body }).where({ id })
-//   res.send('OK')
-// })
+  .post(userController.create) // Save a new user to the database
 
 module.exports = router;

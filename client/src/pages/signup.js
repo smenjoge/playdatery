@@ -52,19 +52,13 @@ function SignUp() {
   }
 
   function saveNewUser(userAuth) {
-    // let addressobj = {
-    //   city: city,
-    //   state: state,
-    //   zip: zip
-    // }
     let newUser = {
       uid: userAuth.user.uid,
       emailID: email,
       displayName: displayName
-      //   image: image,
-      // address: addressobj
     }
-    API.createNewUser(newUser);
+    API.createNewUser(newUser)
+    .catch(error => {console.log(`Error Saving user to the DB: `, error)});
   }
 
   const {
@@ -135,7 +129,7 @@ function SignUp() {
         <ul>{fileRejectionItems}</ul> */}
         </aside>
         <SignUpForm
-          email={email}
+          emailID={email}
           password={password}
           password2={password2}
           displayName={displayName}

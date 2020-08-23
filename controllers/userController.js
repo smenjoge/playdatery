@@ -4,7 +4,6 @@ const db = require("../models");
 module.exports = {
     // Find user/Parent for input firebase uid and return parent and child info for Profile page
     findOne: function(req, res) {
-        console.log(`Getting User from DB`, req.params.userId);
         db.User
         .findOne({uid: req.params.userId})
         .populate("children")
@@ -13,7 +12,6 @@ module.exports = {
     },
     // Create a new user/Parent document
     create: function(req, res) {
-        console.log(`Saving User to DB`, req.body);
         db.User
         .create(req.body)
         .then(dbUser => res.json(dbUser))

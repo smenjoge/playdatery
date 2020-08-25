@@ -1,41 +1,53 @@
 import React, { useState } from "react";
 import API from "../utils/API";
 import ProfileCard from "../components/ProfileCard/profilecard";
-
+import UserContext from "../utils/userContext";
 
 function Profile() {
+  const { userState, setUserState } = React.useContext(UserContext);
+  const { user } = userState;
 
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [zip, setZip] = useState("");
+  const [profileState, setProfileState] = useState({
+    displayName: "",
+    address: {
+      city: "",
+      state: "",
+      zip: ""
+    }
+  });
 
   function handleEdit(event) {
     const { name, value } = event.target;
     console.log("handleEdit clicked");
-
-    if (name === 'city') {
-      setCity(value);
-    }
-    if (name === 'state') {
-      setState(value);
-    }
-    if (name === 'zip') {
-      setZip(value);
-    }
+    
+    setProfileState({ ...profileState, [name]: value })
   }
 
-  function handleUpdateUser() {
-    console.log("handleUpdateUser clicked");
+
+  function handleUpdateUser(event) {
+    event.preventDefault();
+    console.log("handleUpdate");
 
     let profileUpdate = {
-      city: city,
-      state: state,
-      zip: zip
+      displayName: profileState.displayName,
+      address: {
+        city: profileState.address.city,
+        state: profileState.address.state,
+        zip: profileState.address.zip
+      }
     }
 
-    API.updateUser(profileUpdate)
-      .catch(err => console.log(err));
-  };
+    API.updateUser(profileUpdate, user.uid)
+      .then((res) => {
+        console.log(res);
+        setUserState({ ...profileState, user: res.data })
+      })
+      // .then(window.location.reload(false))
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
 
   // handleDeleteUser = event => {
   //   event.preventDefault();
@@ -61,8 +73,10 @@ function Profile() {
 
   return (
     <ProfileCard
-      updateUser={handleUpdateUser}
+      user={user}
+      handleUpdateUser={handleUpdateUser}
       handleEdit={handleEdit}
+      profileState={profileState}
     // deleteUser={handleDeleteUser}
     />
   )
@@ -70,5 +84,4 @@ function Profile() {
 
 
 export default Profile;
-
 

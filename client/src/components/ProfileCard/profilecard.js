@@ -8,7 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import UserContext from "../../utils/userContext";
-import Edit from "./edit";
+// import Edit from "./edit";
 
 const useStyles = makeStyles({
     root: {
@@ -25,7 +25,11 @@ const useStyles = makeStyles({
     }
 });
 
-function profileCard({updateUser, handleEdit}) {
+function profileCard({handleUpdateUser, 
+    handleEdit, 
+    city, 
+    state, 
+    zip}) {
     const {userState} = useContext(UserContext);
     const { user } = userState;
     const classes = useStyles();
@@ -51,16 +55,36 @@ function profileCard({updateUser, handleEdit}) {
             </CardActionArea>
 
             <CardActions>
-                <Edit 
-                updateUser = {updateUser}
-                handleEdit = {handleEdit}
-                />
+                <form>
+                    <input
+                    type="text"
+                    placeholder="Enter City"
+                    name="city"
+                    value={city}
+                    onChange={handleEdit}
+                    />
+                     <input
+                    type="text"
+                    placeholder="Enter state"
+                    name="state"
+                    value={state}
+                    onChange={handleEdit}
+                    />
+                      <input
+                    type="text"
+                    placeholder="Enter zip"
+                    name="zip"
+                    value={zip}
+                    onChange={handleEdit}
+                    />            
+                </form>
             </CardActions>
 
             <CardActions>
                 <Button className={classes.button}>
                     Add Child
           </Button>
+          <Button className={classes.button} onClick={handleUpdateUser}>Edit</Button>
             </CardActions>
         </Card>
     )

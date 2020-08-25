@@ -19,6 +19,8 @@ module.exports = {
     },
     // Update input user/Parent's information and return updated document 
     updateUser: function(req, res) {
+        console.log(req.params.userId);
+        console.log(req.body);
         db.User
           .findOneAndUpdate({uid: req.params.userId}, {displayName: req.body.displayName, address: req.body.address }, { new: true })
           .populate("children")

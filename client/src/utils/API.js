@@ -11,11 +11,11 @@ export default {
     },
     // Save a User to the database
     createNewUser: function (user) {
-        return axios.post("/api/users", user);
+        return axios.post("/api/users/", user);
     },
     // Update a user to the database
-    updateUser: function (updateUser) {
-        return axios.post("/api/users/", updateUser);
+    updateUser: function (updateUser, uid) {
+        return axios.put("/api/users/" + uid, updateUser);
     },
     // Delete a user from the database
     deleteUser: function (uid) {

@@ -25,68 +25,119 @@ const useStyles = makeStyles({
     }
 });
 
-function profileCard({handleUpdateUser, 
-    handleEdit, 
-    city, 
-    state, 
-    zip}) {
-    const {userState} = useContext(UserContext);
+function profileCard(props) {
+    const { handleUpdateUser, handleEdit, addChild, handleAddChild, deleteChild } = props;
+    const { city, state, zip } = props.profileState.address;
+    const { firstName, lastName, age, activities } = props.childState;
+
+    const { userState } = useContext(UserContext);
     const { user } = userState;
     const classes = useStyles();
 
     return (
-        <Card className={classes.root}>
-            <CardActionArea>
-                <CardMedia
-                    className={classes.media}
-                    // image={Mom}
-                    title="displayName"
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2" >
-                        Name: {user.displayName}
-                    </Typography>
-                    <Typography>
-                        Email: {user.emailID}
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                    </Typography>
-                </CardContent>
-            </CardActionArea>
-
-            <CardActions>
-                <form>
-                    <input
-                    type="text"
-                    placeholder="Enter City"
-                    name="city"
-                    value={city}
-                    onChange={handleEdit}
+        <div>
+            <Card className={classes.root}>
+                <CardActionArea>
+                    <CardMedia
+                        className={classes.media}
+                        // image={Mom}
+                        title="displayName"
                     />
-                     <input
-                    type="text"
-                    placeholder="Enter state"
-                    name="state"
-                    value={state}
-                    onChange={handleEdit}
-                    />
-                      <input
-                    type="text"
-                    placeholder="Enter zip"
-                    name="zip"
-                    value={zip}
-                    onChange={handleEdit}
-                    />            
-                </form>
-            </CardActions>
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2" >
+                            Name: {user.displayName}
+                        </Typography>
+                        <Typography>
+                            Email: {user.emailID}
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
 
-            <CardActions>
-                <Button className={classes.button}>
-                    Add Child
-          </Button>
-          <Button className={classes.button} onClick={handleUpdateUser}>Edit</Button>
-            </CardActions>
-        </Card>
+                <CardActions>
+                    <form>
+                        <div className="form-group">
+                            <input
+                                type="text"
+                                placeholder="Enter City"
+                                name="city"
+                                value={city}
+                                onChange={handleEdit}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <input
+                                type="text"
+                                placeholder="Enter state"
+                                name="state"
+                                value={state}
+                                onChange={handleEdit}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <input
+                                type="text"
+                                placeholder="Enter zip"
+                                name="zip"
+                                value={zip}
+                                onChange={handleEdit}
+                            />
+                        </div>
+                    </form>
+                </CardActions>
+
+                <CardActions>
+                    <Button className={classes.button} onClick={addChild}>Add Child</Button>
+                    <Button className={classes.button} onClick={deleteChild}>Delete</Button>
+                    <Button className={classes.button} onClick={handleUpdateUser}>Update</Button>
+                </CardActions>
+            </Card>
+
+
+            <Card>
+                <CardActions>
+                    <form>
+                        <div className="form-group">
+                            <input
+                                type="text"
+                                placeholder="First Name"
+                                name="firstName"
+                                value={firstName}
+                                onChange={handleAddChild}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <input
+                                type="text"
+                                placeholder="Last Name"
+                                name="lastName"
+                                value={lastName}
+                                onChange={handleAddChild}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <input
+                                type="text"
+                                placeholder="Age"
+                                name="age"
+                                value={age}
+                                onChange={handleAddChild}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <input
+                                type="text"
+                                placeholder="Activities"
+                                name="activities"
+                                value={activities}
+                                onChange={handleAddChild}
+                            />
+                        </div>
+                    </form>
+                </CardActions>
+            </Card>
+        </div>
     )
 }
 

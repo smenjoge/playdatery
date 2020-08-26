@@ -29,6 +29,7 @@ module.exports = {
     },
     // Add a child to input user/Parent's document. Please note user document is found using firebase uid 
     addChild: function(req, res) {
+        console.log("anything");
         db.Child
           .create(req.body)
           .then(({_id}) => db.User

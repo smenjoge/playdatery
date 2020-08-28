@@ -23,7 +23,8 @@ function App() {
        if (userAuth) {
          API.getSavedUser(userAuth.uid)
         .then(res => {
-          setUserState({ ...userState, user: res.data });
+          console.log(`User coming from DB:`, res.data[0]);
+          setUserState({ ...userState, user: res.data[0] });
          })
          .catch(error => {
            console.log(`Error getting user from DB:`, error);

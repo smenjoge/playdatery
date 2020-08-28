@@ -72,10 +72,14 @@ function Profile() {
         updateUser={updateUser}
         addChild={addChild}
       />
-      <ChildList 
-        updateChild={updateChild}
-        deleteChild={deleteChild}
-      />
+      {user.children ? 
+        <ChildList 
+          updateChild={updateChild}
+          deleteChild={deleteChild}
+        />
+      :
+        <div></div>
+      }
     </div>
   )
 }

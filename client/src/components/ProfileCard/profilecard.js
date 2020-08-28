@@ -31,6 +31,7 @@ function profileCard(props) {
     const { userState } = useContext(UserContext);
     const { user } = userState;
     const classes = useStyles();
+    console.log(`User on profile page:`, user);
 
     return (
         <div>

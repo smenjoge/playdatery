@@ -42,11 +42,12 @@ module.exports = {
     // Remove a child from input user/Parent's document. Please note user document is found using firebase uid and child document 
     // is found using mongoDB _id. 
     removeChild: function(req, res) {
-        let childToRemove = req.body;
+        console.log(req.body);
+        let childToRemove = req.body.childId;
         db.Child
         .deleteOne({ _id: childToRemove })
         .then(() => db.User
-                    .findOneAndUpdate({uid: req.params.userId}, { $pull: { children: {_id: childToRemove} } }, { new: true })
+                    .findOneAndUpdate({uid: req.body.uid}, { $pull: { children: {_id: childToRemove} } }, { new: true })
                     .populate("children")
                     .then(dbUser => res.json(dbUser))
                     .catch(err => res.status(422).json(err)))

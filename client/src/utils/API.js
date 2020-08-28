@@ -17,14 +17,27 @@ export default {
     deleteUser: function (uid) {
         return axios.delete("/api/users/" + uid);
     },
+    // Get saved children from database
+    getSavedChild: function (childObj, uid) {
+        return axios.get("/api/users/" + uid + "/child/", childObj );
+    },
+    // Add child to user
     addChild: function (childObj, uid) {
         return axios.post("/api/users/" + uid + "/child/", childObj );
     },
-    removeChild: function (childID, uid) {
-        return axios.delete("/api/users/" + uid + "/child/", childID);
+    // Remove child from user
+    removeChild: function (body) {
+        //console.log(uid);
+        //console.log(childID);
+        return axios.delete("/api/users/", {data: body});
     },
+    // Update child data
     updateChild: function (childObj, uid) {
         return axios.put("/api/users/" + uid + "/child/", childObj)
+    },
+    //Get upcoming events
+    getEvents: function() {
+        return axios.get("/api/events");
     }
 }
 

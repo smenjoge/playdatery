@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import UserContext from "../../utils/userContext";
 // import Edit from "./edit";
+import ChildModal from "../Modal/modal";
 
 const useStyles = makeStyles({
     root: {
@@ -26,9 +27,12 @@ const useStyles = makeStyles({
 });
 
 function profileCard(props) {
-    const { handleUpdateUser, handleEdit, addChild, handleAddChild, deleteChild } = props;
+    const { handleUpdateUser, handleEdit,
+        addChild, handleAddChild, deleteChild, 
+        handleOpen, handleClose, open } = props;
+
     const { city, state, zip } = props.profileState.address;
-    const { firstName, lastName, age, activities } = props.childState;
+    const { id, firstName, lastName, age, activities } = props.childState;
 
     const { userState } = useContext(UserContext);
     const { user } = userState;
@@ -88,55 +92,23 @@ function profileCard(props) {
                 </CardActions>
 
                 <CardActions>
-                    <Button className={classes.button} onClick={addChild}>Add Child</Button>
-                    <Button className={classes.button} onClick={deleteChild}>Delete</Button>
+                    <Button className={classes.button} onClick={handleOpen}>Add Child</Button>
+
                     <Button className={classes.button} onClick={handleUpdateUser}>Update</Button>
                 </CardActions>
             </Card>
 
 
-            <Card>
-                <CardActions>
-                    <form>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                placeholder="First Name"
-                                name="firstName"
-                                value={firstName}
-                                onChange={handleAddChild}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                placeholder="Last Name"
-                                name="lastName"
-                                value={lastName}
-                                onChange={handleAddChild}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                placeholder="Age"
-                                name="age"
-                                value={age}
-                                onChange={handleAddChild}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                placeholder="Activities"
-                                name="activities"
-                                value={activities}
-                                onChange={handleAddChild}
-                            />
-                        </div>
-                    </form>
-                </CardActions>
-            </Card>
+            <ChildModal
+                handleOpen={handleOpen}
+                handleClose={handleClose}
+                open={open}
+                addChild={addChild}
+                childState={props.childState}
+                handleAddChild={handleAddChild}
+                deleteChild={deleteChild}
+
+            />
         </div>
     )
 }

@@ -1,10 +1,15 @@
 const router = require("express").Router();
 const userController = require("../../controllers/userController");
 
-// // Matches with "/api/users/:userId"
+// Matches with "/api/users/:userId"
 router.route("/:userId")
   .get(userController.findOne) // Get User info to display on Profile Page
   .put(userController.updateUser) // Update user info
+
+// Matches with "/api/users/:userId"
+router.route("/:userId/search")
+.get(userController.searchChildren) // Get List of children to display on search
+
 
 // Matches with "/api/users/:userId/child"
 

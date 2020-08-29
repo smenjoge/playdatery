@@ -5,11 +5,10 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import UserModal from "../Modal/userModal";
+import ChildModal from "../Modal/childModal";
 import UserContext from "../../utils/userContext";
-// import Edit from "./edit";
-import ChildModal from "../Modal/modal";
 
 const useStyles = makeStyles({
     root: {
@@ -27,16 +26,12 @@ const useStyles = makeStyles({
 });
 
 function profileCard(props) {
-    const { handleUpdateUser, handleEdit,
-        addChild, handleAddChild, deleteChild, 
-        handleOpen, handleClose, open } = props;
-
-    const { city, state, zip } = props.profileState.address;
-    const { id, firstName, lastName, age, activities } = props.childState;
+    const { updateUser,  addChild } = props;
 
     const { userState } = useContext(UserContext);
     const { user } = userState;
     const classes = useStyles();
+    console.log(`User on profile page:`, user);
 
     return (
         <div>
@@ -44,15 +39,24 @@ function profileCard(props) {
                 <CardActionArea>
                     <CardMedia
                         className={classes.media}
-                        // image={Mom}
+                        image="https://via.placeholder.com/250"
                         title="displayName"
                     />
                     <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2" >
+                        <Typography gutterBottom variant="h5" component="h3" >
                             Name: {user.displayName}
                         </Typography>
                         <Typography>
                             Email: {user.emailID}
+                        </Typography>
+                        <Typography>
+                            City: {(user.address && user.address.city) ? user.address.city : ""}
+                        </Typography>
+                        <Typography>
+                            State: {(user.address && user.address.state) ? user.address.state : ""}
+                        </Typography>
+                        <Typography>
+                            Zip: {(user.address && user.address.zip) ? user.address.zip : ""}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
                         </Typography>
@@ -60,55 +64,64 @@ function profileCard(props) {
                 </CardActionArea>
 
                 <CardActions>
-                    <form>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                placeholder="Enter City"
-                                name="city"
-                                value={city}
-                                onChange={handleEdit}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                placeholder="Enter state"
-                                name="state"
-                                value={state}
-                                onChange={handleEdit}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                placeholder="Enter zip"
-                                name="zip"
-                                value={zip}
-                                onChange={handleEdit}
-                            />
-                        </div>
-                    </form>
-                </CardActions>
-
-                <CardActions>
-                    <Button className={classes.button} onClick={handleOpen}>Add Child</Button>
-
-                    <Button className={classes.button} onClick={handleUpdateUser}>Update</Button>
+                    <UserModal
+                        updateUser={updateUser}
+                    >
+                        Edit
+                    </UserModal>
+                    <ChildModal
+                        saveChild={addChild}
+                        childValues={{firstName : "", lastName : "", age : "", activities : ""}} // Sending spaces for child fields from Add action
+                    >
+                        Add Child
+                    </ChildModal>
                 </CardActions>
             </Card>
 
 
-            <ChildModal
-                handleOpen={handleOpen}
-                handleClose={handleClose}
-                open={open}
-                addChild={addChild}
-                childState={props.childState}
-                handleAddChild={handleAddChild}
-                deleteChild={deleteChild}
-
-            />
+            {/* <Card>
+                <CardActions>
+                    <form>
+                        <div className="form-group">
+                            <input
+                                type="text"
+                                placeholder="First Name"
+                                name="firstName"
+                                value={firstName}
+                                onChange={handleAddChild}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <input
+                                type="text"
+                                placeholder="Last Name"
+                                name="lastName"
+                                value={lastName}
+                                onChange={handleAddChild}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <input
+                                type="text"
+                                placeholder="Age"
+                                name="age"
+                                value={age}
+                                onChange={handleAddChild}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <input
+                                type="text"
+                                placeholder="Activities"
+                                name="activities"
+                                value={activities}
+                                onChange={handleAddChild}
+                            />
+                        </div>
+                        <Button className={classes.button} onClick={deleteChild}>Delete</Button>
+                    </form>
+                </CardActions>
+            </Card> */}
         </div>
     )
 }

@@ -5,9 +5,21 @@ module.exports = {
     // Find user/Parent for input firebase uid and return parent and child info for Profile page
     findOne: function(req, res) {
         db.User
-        .findOne({uid: req.params.userId})
+        .find({uid: req.params.userId})
         .populate("children")
         .then(dbUser => res.json(dbUser))
+        .catch(err => res.status(422).json(err));
+    },
+    // Return list of children to be displayed on search result.
+    searchChildren: function(req, res) {
+        db.User
+        .findOne({uid: req.params.userId })
+        .then((_id) => db.Child
+                        .find({parentId : {$ne :_id}})
+                        .populate("User", "uid address")
+                        .then(dbUser => res.json(dbUser))
+                        .catch(err => res.status(422).json(err))
+            )
         .catch(err => res.status(422).json(err));
     },
     // Create a new user/Parent document
@@ -29,7 +41,7 @@ module.exports = {
     },
     // Add a child to input user/Parent's document. Please note user document is found using firebase uid 
     addChild: function(req, res) {
-        console.log("anything");
+        console.log(`Add Child`, req.body);
         db.Child
           .create(req.body)
           .then(({_id}) => db.User
@@ -42,8 +54,8 @@ module.exports = {
     // Remove a child from input user/Parent's document. Please note user document is found using firebase uid and child document 
     // is found using mongoDB _id. 
     removeChild: function(req, res) {
-        console.log(req.body);
-        let childToRemove = req.body.childId;
+        console.log(`Remove Child`, req.body);
+        let childToRemove = req.body.childID;
         db.Child
         .deleteOne({ _id: childToRemove })
         .then(() => db.User

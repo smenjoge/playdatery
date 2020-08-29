@@ -59,7 +59,7 @@ module.exports = {
         db.Child
         .deleteOne({ _id: childToRemove })
         .then(() => db.User
-                    .findOneAndUpdate({uid: req.params.userId}, { $pull: { children: {_id: childToRemove} } }, { new: true })
+                    .findOneAndUpdate({uid: req.body.uid}, { $pull: { children: {_id: childToRemove} } }, { new: true })
                     .populate("children")
                     .then(dbUser => res.json(dbUser))
                     .catch(err => res.status(422).json(err)))

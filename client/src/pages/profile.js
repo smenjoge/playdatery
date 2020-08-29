@@ -3,6 +3,7 @@ import API from "../utils/API";
 import ProfileCard from "../components/ProfileCard/profilecard";
 import ChildList from "../components/ChildList"
 import UserContext from "../utils/userContext";
+import ChildCard from "../components/ChildCard/index";
 
 function Profile() {
   const { userState, setUserState } = useContext(UserContext);
@@ -65,6 +66,17 @@ function Profile() {
       console.log(error.response)
     })
   }
+
+  //MODAL
+  const [open, setOpen] = React.useState(false);
+  
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <div>

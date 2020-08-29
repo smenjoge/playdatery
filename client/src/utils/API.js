@@ -30,7 +30,12 @@ export default {
         }
         return axios.delete(`/api/users/${uid}/child/`, {data: body});
     },
+    // Update child data
     updateChild: function (childObj, uid) {
         return axios.put("/api/users/" + uid + "/child/", childObj)
+    },
+    //Get upcoming events
+    getEvents: function() {
+        return axios.get("/api/events");
     }
 }

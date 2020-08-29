@@ -71,57 +71,12 @@ function profileCard(props) {
                     </UserModal>
                     <ChildModal
                         saveChild={addChild}
-                        childValues={{firstName : "", lastName : "", age : "", activities : ""}} // Sending spaces for child fields from Add action
+                        childValues={{_id: "", firstName : "", lastName : "", age : "", activities : ""}} // Sending spaces for child fields from Add action
                     >
                         Add Child
                     </ChildModal>
                 </CardActions>
             </Card>
-
-
-            {/* <Card>
-                <CardActions>
-                    <form>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                placeholder="First Name"
-                                name="firstName"
-                                value={firstName}
-                                onChange={handleAddChild}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                placeholder="Last Name"
-                                name="lastName"
-                                value={lastName}
-                                onChange={handleAddChild}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                placeholder="Age"
-                                name="age"
-                                value={age}
-                                onChange={handleAddChild}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                placeholder="Activities"
-                                name="activities"
-                                value={activities}
-                                onChange={handleAddChild}
-                            />
-                        </div>
-                        <Button className={classes.button} onClick={deleteChild}>Delete</Button>
-                    </form>
-                </CardActions>
-            </Card> */}
         </div>
     )
 }

@@ -8,11 +8,10 @@ router.route("/:userId")
 
 // Matches with "/api/users/:userId"
 router.route("/:userId/search")
-.get(userController.searchChildren) // Get List of children to display on search
+  .get(userController.searchChildren) // Get List of children to display on search
 
 
 // Matches with "/api/users/:userId/child"
-
 router
   .route("/:userId/child")
   .post(userController.addChild) // Add child to user document
@@ -22,4 +21,5 @@ router
 // Matches with "/api/users"
 router.route("/")
   .post(userController.create) // Save a new user to the database
+
 module.exports = router;

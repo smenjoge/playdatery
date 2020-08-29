@@ -17,8 +17,8 @@ module.exports = {
         db.User
         .findOne({uid: req.params.userId })
         .then((_id) => db.Child
-                        .find({parentId : {$ne :_id}})
-                        .populate("User", "uid address")
+                        .find({parent : {$ne :_id}})
+                        .populate("parent", "uid address")
                         .then(dbUser => res.json(dbUser))
                         .catch(err => res.status(422).json(err))
             )

@@ -11,7 +11,7 @@ export default {
     },
     // Get list of children to show on search results
     searchChildren: function (uid) {
-        return axios.get("/api/users/" + uid + "/search/" );
+        return axios.get("/api/users/" + uid + "/search/");
     },
     // Save a User to the database
     createNewUser: function (user) {
@@ -28,14 +28,16 @@ export default {
         let body = {
             childID
         }
-        return axios.delete(`/api/users/${uid}/child/`, {data: body});
+        return axios.delete(`/api/users/${uid}/child/`, { data: body });
     },
     // Update child data
     updateChild: function (childObj, uid) {
         return axios.put("/api/users/" + uid + "/child/", childObj)
     },
     //Get upcoming events
-    getEvents: function() {
+    getEvents: function () {
         return axios.get("/api/events");
     }
 }
+
+

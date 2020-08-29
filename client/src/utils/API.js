@@ -9,6 +9,10 @@ export default {
     getSavedUser: async function (uid) {
         return await axios.get("/api/users/" + uid);
     },
+    // Get list of children to show on search results
+    searchChildren: function (uid) {
+        return axios.get("/api/users/" + uid + "/search/");
+    },
     // Save a User to the database
     createNewUser: function (user) {
         return axios.post("/api/users/", user);
@@ -24,15 +28,11 @@ export default {
         let body = {
             childID
         }
-        return axios.delete(`/api/users/${uid}/child/`, {data: body});
+        return axios.delete(`/api/users/${uid}/child/`, { data: body });
     },
     // Update child data
     updateChild: function (childObj, uid) {
         return axios.put("/api/users/" + uid + "/child/", childObj)
-    },
-    // Get saved children from database
-    getSavedChild: function (childObj, uid) {
-        return axios.get("/api/users/" + uid + "/child/", childObj);
     },
     //Get upcoming events
     getEvents: function () {

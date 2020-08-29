@@ -7,9 +7,9 @@ function PublicHome() {
 
     return (
         <div>
-<Carousel />
-<Testimonials />
-</div>
+            <Carousel />
+            <Testimonials />
+        </div>
     )
 }
 

@@ -18,14 +18,20 @@ const UserSchema = new Schema({
   },
   image: { type: String },
   address: {
-    city: { type: String, trim: true },
+    city: { 
+      type: String, 
+      trim: true 
+    },
     state: {
       type: String,
       uppercase: true,
       // required: true,
       enum: statesArray
     },
-    zip: { type: String, trim: true },
+    zip: { 
+      type: String, 
+      trim: true 
+    },
   },
   children: [
     {

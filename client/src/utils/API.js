@@ -1,9 +1,13 @@
 import axios from "axios";
 
 export default {
-    // Get saved User from database
-    getSavedUser: function (uid) {
-        return axios.get("/api/users/" + uid);
+    // // Find books by calling Google API
+    // findBooks: function(bookName) {
+    //     return axios.get("/api/books/find/" + bookName); 
+    // },
+    // Get logged in User's info from database
+    getSavedUser: async function (uid) {
+        return await axios.get("/api/users/" + uid);
     },
     // Save a User to the database
     createNewUser: function (user) {

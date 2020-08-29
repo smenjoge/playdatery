@@ -14,7 +14,7 @@ export default {
         return axios.put("/api/users/" + uid, updateUser);
     },
     addChild: function (childObj, uid) {
-        return axios.post("/api/users/" + uid + "/child/", childObj );
+        return axios.post("/api/users/" + uid + "/child/", childObj);
     },
     removeChild: function (childID, uid) {
         let body = {

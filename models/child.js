@@ -22,10 +22,6 @@ const ChildSchema = new Schema({
         type: String,
         trim: true
     },
-    parentId : {
-      type: Schema.Types.ObjectId,
-      ref: "User"
-    },
     image: { type: String }
 });
 

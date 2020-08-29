@@ -33,12 +33,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 50,
   },
   media: {
-      height: 300,
+    height: 300,
   },
   button: {
-      background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-      fontWeight: 'bolder',
-      color: 'white',
+    background: 'rgba(34,133,195,1)',
+    fontWeight: 'bolder',
+    color: 'white',
   }
 }));
 
@@ -72,64 +72,64 @@ function UserModal(props) {
     const { name, value } = event.target;
 
     if (name === "displayName") {
-        setProfileState({...profileState, [name]: value});
+      setProfileState({ ...profileState, [name]: value });
     } else {
-        const address = { ...profileState.address, [name]: value };
-        const newObj = { ...profileState, address };
-        setProfileState(newObj);
+      const address = { ...profileState.address, [name]: value };
+      const newObj = { ...profileState, address };
+      setProfileState(newObj);
     }
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-      updateUser(profileState);
-      handleClose();
+    updateUser(profileState);
+    handleClose();
   }
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <form>
         <div className="form-group">
-            <input
-                type="text"
-                placeholder="Name"
-                name="displayName"
-                value={profileState.displayName}
-                onChange={handleEdit}
-            />
+          <input
+            type="text"
+            placeholder="Name"
+            name="displayName"
+            value={profileState.displayName}
+            onChange={handleEdit}
+          />
         </div>
         <div className="form-group">
-            <input
-                type="text"
-                placeholder="City"
-                name="city"
-                value={profileState.address.city}
-                onChange={handleEdit}
-            />
+          <input
+            type="text"
+            placeholder="City"
+            name="city"
+            value={profileState.address.city}
+            onChange={handleEdit}
+          />
         </div>
         <div className="form-group">
-            <input
-                type="text"
-                placeholder="state"
-                name="state"
-                value={profileState.address.state}
-                onChange={handleEdit}
-            />
+          <input
+            type="text"
+            placeholder="state"
+            name="state"
+            value={profileState.address.state}
+            onChange={handleEdit}
+          />
         </div>
         <div className="form-group">
-            <input
-                type="text"
-                placeholder="zip"
-                name="zip"
-                value={profileState.address.zip}
-                onChange={handleEdit}
-            />
+          <input
+            type="text"
+            placeholder="zip"
+            name="zip"
+            value={profileState.address.zip}
+            onChange={handleEdit}
+          />
         </div>
         <Button className={classes.button} onClick={handleSubmit}>
-            Save
+          Save
         </Button>
         <Button className={classes.button} onClick={handleClose}>
-            Close
+          Close
         </Button>
       </form>
     </div>

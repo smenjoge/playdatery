@@ -8,7 +8,7 @@ import SignUp from "./pages/signup";
 import Profile from "./pages/profile";
 import UserContext from "./utils/userContext";
 import API from "./utils/API";
-
+import Footer from "./components/Footer/footer";
 
 function App() {
   const [userState, setUserState] = useState({
@@ -53,6 +53,7 @@ function App() {
             </Switch>
           </div>
         }
+        <Footer />
       </Router>
     </UserContext.Provider>
   )

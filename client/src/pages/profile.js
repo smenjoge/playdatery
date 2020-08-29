@@ -29,7 +29,8 @@ function Profile() {
       firstName: childInfo.firstName,
       lastName: childInfo.lastName,
       age: childInfo.age,
-      activities: childInfo.activities
+      activities: childInfo.activities,
+      parent: user._id
     }
 
     API.addChild(childInfoAdd, user.uid)

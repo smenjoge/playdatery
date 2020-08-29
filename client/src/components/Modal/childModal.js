@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function addChildModal(props) {
+function childModal(props) {
   const { childValues, saveChild } = props;
 
   const classes = useStyles();
@@ -56,11 +56,22 @@ function addChildModal(props) {
     activities: childValues.activities
   });
 
+  function setDefaultChildState() {
+    setChildState({
+      _id : "",
+      firstName: "",
+      lastName:  "",
+      age: "",
+      activities: "" 
+    });
+  }
+
   const handleOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
+    setDefaultChildState();
     setOpen(false);
   };
 
@@ -141,4 +152,4 @@ function addChildModal(props) {
   );
 }
 
-export default addChildModal;
+export default childModal;

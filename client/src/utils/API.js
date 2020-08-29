@@ -6,8 +6,8 @@ export default {
     //     return axios.get("/api/books/find/" + bookName); 
     // },
     // Get logged in User's info from database
-    getSavedUser: function (uid) {
-        return axios.get("/api/users/" + uid);
+    getSavedUser: async function (uid) {
+        return await axios.get("/api/users/" + uid);
     },
     // Get list of children to show on search results
     searchChildren: function (uid) {

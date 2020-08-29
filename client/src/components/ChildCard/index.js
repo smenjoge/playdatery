@@ -12,7 +12,7 @@ const useStyles = makeStyles({
         height: 300,
     },
     button: {
-        background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+        background: 'rgba(34,133,195,1)',
         fontWeight: 'bolder',
         color: 'white',
     }

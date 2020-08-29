@@ -3,14 +3,16 @@ import React, { useContext, useState, useEffect } from "react";
 import UserContext from "../utils/userContext";
 import SearchForm from '../components/SearchForm/SearchForm';
 import API from "../utils/API";
-import ResultCard from "../components/ResultCard/ResultCard";
+import { ResultCard, ChildListItem } from "../components/ResultCard/ResultCard";
+import Grid from '@material-ui/core/Grid';
+import "./style/home.css";
 
 function Home() {
     const { userState } = useContext(UserContext);
     const { user } = userState;
 
-    const [search, setSearch] = useState([])
-
+    const [child, setChild] = useState([])
+    const [childSearch, setChildSearch] = useState("");
 
     // Load any upcoming events
     useEffect(() => {
@@ -25,49 +27,56 @@ function Home() {
 
     //Search for child
     function handleInputChange(event) {
-        const { name, value } = event.target;
-        setSearch({ ...search, [name]: value })
+        // const { name, value } = event.target;
+        // setSearch({ ...formObject, [name]: value })
+        // console.log(search);
+        const { value } = event.target;
+        setChildSearch(value);
+        console.log(value);
     };
 
     function handleSearchChild(event) {
         event.preventDefault();
 
-        API.getSavedChild(res)
+        API.searchChildren(childSearch)
             .then(res => {
-                const child = res.data
                 console.log(res)
-                setSearch(child)
+                const child = res.data
+                setChild(child)
             })
-            .catch (err => console.log(err));
-
+            .catch(err => console.log(err));
     };
 
     return (
-        <div>
+       <div>
             <h2>Welcome {user.displayName}</h2>
 
-            <div className='container'>
+            <Grid justify="center">
                     <SearchForm
-                    handleInputChange = {handleInputChange}
-                    handleSearchChild = {handleSearchChild} />
+                        handleInputChange={handleInputChange}
+                        handleSearchChild={handleSearchChild} />
+                <Grid justify="center">
+                    {!child.length ? (
+                        <h2>No results found</h2>
+                    ) : (
+                            <ResultCard>
+                                {child.map(child => {
+                                    return (
+                                        <ChildListItem
+                                            id={child.id}
+                                            firstName={child.firstName}
+                                            lastName={child.lastName}
+                                            age={child.age}
+                                            activities={child.activities}
+                                        />
+                                    );
+                                })}
+                            </ResultCard>
+                        )}
 
-                    <div>
-                        {search.map((child) => {
-                            return (
-                                <ResultCard
-                                id={child.id}
-                                firstName={child.firstName}
-                                lastName={child.lastName}
-                                age={child.age}
-                                activities={child.activities}
-                                />
-                            )
-                        })}
-                    </div>
-                </div>
-
-            {/* <Upcoming /> */}
-        </div>
+                </Grid>
+            </Grid>
+            </div>
     )
 }
 

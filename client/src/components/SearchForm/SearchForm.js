@@ -1,10 +1,10 @@
 import React from 'react';
-
+import './style.css';
 
 function SearchForm(props) {
 
     return (
-        <div>
+        <div className="homeSearch">
             <div>
                 <div>
                     <input name='search'
@@ -16,7 +16,9 @@ function SearchForm(props) {
                         className='btn btn-link'
                         onClick={props.handleSearchChild}
                         type='submit'
-                    >   Search
+                    >   
+                    <i className="fa fa-search"></i>
+                    Search
             </button>
                 </div>
             </div>

@@ -11,7 +11,7 @@ import './style.css';
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: 656,
+        maxWidth: 345,
     },
     media: {
         height: 200,
@@ -28,7 +28,6 @@ export function ResultCard({ children }) {
 }
 
 export function ChildListItem({
-    id,
     firstName,
     lastName,
     age,
@@ -37,7 +36,7 @@ export function ChildListItem({
     const classes = useStyles();
 
     return (
-        <div key={id}>
+        <div>
             <Card className={classes.root}>
                 <CardMedia
                     className={classes.media}

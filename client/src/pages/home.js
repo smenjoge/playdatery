@@ -84,7 +84,7 @@ function Home() {
                                 {child.map(child => {
                                     return (
                                         <ChildListItem
-                                            id={child._id}
+                                            key={child._id}
                                             firstName={child.firstName}
                                             lastName={child.lastName}
                                             age={child.age}

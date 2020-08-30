@@ -54,7 +54,7 @@ function SearchAppBar() {
                   <MenuItem onClick={handleClose} >Profile</MenuItem>
                 </Link>
 
-                <Link to="/login">
+                <Link to="/publicHome">
                   <MenuItem onClick={handleCloseSignOut} >Logout</MenuItem>
                 </Link>
               </div>

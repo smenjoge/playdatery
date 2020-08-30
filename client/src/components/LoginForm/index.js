@@ -1,12 +1,17 @@
 import React from "react";
 
 function LoginForm(props) {
-    const {email, password, handleInputChange, handleBtnSubmit} = props;
+    const {email, password, error, handleInputChange, handleBtnSubmit} = props;
     return (
         <div className="container">
             <div className="row">
             <div className="col-md-6 col-md-offset-3">
                 <h2>Login Form</h2>
+                {error !== null && (
+                    <div className="py-1 bg-red-600 w-full text-danger text-center mb-3">
+                        {error}
+                    </div>
+                )}
                 <form className="login">
                     <div className="form-group">
                         <label htmlFor="InputEmail">Email address</label>

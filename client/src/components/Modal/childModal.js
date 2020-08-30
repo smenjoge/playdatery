@@ -3,20 +3,20 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 
-// function rand() {
-//   return Math.round(Math.random() * 20) - 10;
-// }
+function rand() {
+  return Math.round(Math.random() * 20) - 10;
+}
 
-// function getModalStyle() {
-//   const top = 50 + rand();
-//   const left = 50 + rand();
+function getModalStyle() {
+  const top = 50 + rand();
+  const left = 50 + rand();
 
-//   return {
-//     top: `${top}%`,
-//     left: `${left}%`,
-//     transform: `translate(-${top}%, -${left}%)`,
-//   };
-// }
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -45,7 +45,7 @@ function childModal(props) {
   const { childValues, saveChild } = props;
 
   const classes = useStyles();
-  // const [modalStyle] = useState(getModalStyle);
+  const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
 
   const [childState, setChildState] = useState({
@@ -58,11 +58,11 @@ function childModal(props) {
 
   function setDefaultChildState() {
     setChildState({
-      _id : "",
-      firstName: "",
-      lastName:  "",
-      age: "",
-      activities: "" 
+      _id : childValues._id,
+      firstName: childValues.firstName ,
+      lastName:  childValues.lastName,
+      age: childValues.age,
+      activities: childValues.activities
     });
   }
 
@@ -87,7 +87,7 @@ function childModal(props) {
   }
 
   const body = (
-    <div className={classes.paper}>
+    <div style={modalStyle} className={classes.paper}>
       <form>
         <div className="form-group">
             <input

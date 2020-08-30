@@ -6,6 +6,7 @@ import Home from "./pages/home";
 import Login from "./pages/login";
 import SignUp from "./pages/signup";
 import Profile from "./pages/profile";
+import PublicHome from "./pages/publicHome"
 import UserContext from "./utils/userContext";
 import API from "./utils/API";
 import Footer from "./components/Footer/footer";
@@ -40,12 +41,15 @@ function App() {
       <Router>
         <Navbar />
         {!userState.user ?
-          <div className="container-fluid">
-            <Route exact path={["/", "/login"]} component={Login} />
-            <Route exact path="/signup" component={SignUp} />
+          <div className="container-fluid" style={{"paddingBottom": "165px"}}>
+            <Switch>
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/signup" component={SignUp} />
+              <Route component={PublicHome}/>
+            </Switch>
           </div>
           :
-          <div className="container-fluid">
+          <div className="container-fluid" style={{"paddingBottom": "165px"}}>
             <Switch>
               <Route exact path="/home" component={Home} />
               <Route exact path="/profile" component={Profile} />

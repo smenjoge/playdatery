@@ -10,6 +10,7 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const [displayName, setDisplayName] = useState("");
+  const [error, setError] = useState(null);
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -29,12 +30,17 @@ function SignUp() {
 
   function handleBtnSubmit(event) {
     event.preventDefault();
-    auth.createUserWithEmailAndPassword(email, password)
-      .then((userAuth) => saveNewUser(userAuth))
-      .catch(error => {
-        console.error("Error signing up with email and password", error);
-      }
-      )
+    if (email === " " || password === " " || password2 === " " || displayName === " " ) {
+      setError('Enter all the Information');
+    } else if (password !== password2) {
+      setError('Enter the same password twice');
+    } else {
+      auth.createUserWithEmailAndPassword(email, password)
+        .then((userAuth) => saveNewUser(userAuth))
+        .catch(error => {
+          setError(error.message);
+      })
+    }
   }
 
   function saveNewUser(userAuth) {
@@ -44,14 +50,21 @@ function SignUp() {
       displayName: displayName
     }
     API.createNewUser(newUser)
-    .catch(error => {console.log(`Error Saving user to the DB: `, error)});
+    .catch(error => {
+      setError('Service Unavailable, try again later. ');
+      console.log(`Error Saving user to the DB: `, error)
+    });
   }
 
   return (
     <Box display="flex" justifyContent="center">
       <section className="container">
         <h2>Sign Up</h2>
-        
+        {error !== null && (
+          <div className="py-1 bg-red-600 w-full text-danger text-center mb-3">
+            {error}
+          </div>
+        )}
         <SignUpForm
           emailID={email}
           password={password}

@@ -5,13 +5,13 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
+// import Grid from '@material-ui/core/Grid';
 import Lucas from './Lucas.jpg';
 import './style.css';
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: 345,
+        maxWidth: 656,
     },
     media: {
         height: 200,
@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 });
 
 export function ResultCard({ children }) {
-    return <p>{children}</p>;
+    return <div>{children}</div>;
 }
 
 export function ChildListItem({
@@ -37,21 +37,21 @@ export function ChildListItem({
     const classes = useStyles();
 
     return (
-     <div>
-        <Card className={classes.root}>
-            <CardMedia
-                className={classes.media}
-                image={Lucas}
-                title={firstName}
-            />
-            <CardActionArea>
-                <Typography gutterBottom variant="h5" component="h2">
-                    {firstName} {lastName} </Typography>
-                    
-                <Typography>Age: {age}</Typography>
-                <Typography>Activities: {activities}</Typography>
-            </CardActionArea>
-        </Card>
+        <div key={id}>
+            <Card className={classes.root}>
+                <CardMedia
+                    className={classes.media}
+                    image={Lucas}
+                    title={firstName}
+                />
+                <CardActionArea>
+                    <Typography gutterBottom variant="h5" component="h2">
+                        {firstName} {lastName} </Typography>
+                        
+                    <Typography>Age: {age}</Typography>
+                    <Typography>Activities: {activities}</Typography>
+                </CardActionArea>
+            </Card>
         </div>
     );
 }

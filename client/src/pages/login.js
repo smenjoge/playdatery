@@ -5,6 +5,7 @@ import { auth } from "../firebase";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   function handleInputChange (event) {
     const {name, value} = event.target;
@@ -18,17 +19,22 @@ function Login() {
 
   function handleBtnSubmit (event) {
     event.preventDefault();
-    auth.signInWithEmailAndPassword( email, password)
-      .catch(error => {
-        console.error("Error signing in with password and email", error);
-      }
-    )
+    if (email === "" || password === "" ) {
+      setError('Enter your Email and Password to Login.');
+    } else {
+      auth.signInWithEmailAndPassword( email, password)
+        .catch(() => {
+          setError("Error Loging in with this email and password.");
+        }
+      )
+    }
   }
 
   return (
     <LoginForm
       email={email}
       password={password}
+      error={error}
       handleInputChange={handleInputChange}
       handleBtnSubmit={handleBtnSubmit}
     />

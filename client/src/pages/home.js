@@ -85,10 +85,7 @@ function Home() {
                                     return (
                                         <ChildListItem
                                             key={child._id}
-                                            firstName={child.firstName}
-                                            lastName={child.lastName}
-                                            age={child.age}
-                                            activities={child.activities}
+                                            child={child}
                                         />
                                     );
                                 })}

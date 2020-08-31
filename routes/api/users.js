@@ -18,6 +18,10 @@ router
   .delete(userController.removeChild) // remove child from user document
   .put(userController.updateChild) // Update child document
 
+// Matches with "/api/users/child/:childId"
+router.route("/child/:childId")
+  .put(userController.updateChildImage) // update child's image URL
+
 // Matches with "/api/users"
 router.route("/")
   .post(userController.create) // Save a new user to the database

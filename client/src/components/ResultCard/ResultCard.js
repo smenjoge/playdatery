@@ -27,12 +27,8 @@ export function ResultCard({ children }) {
     return <div>{children}</div>;
 }
 
-export function ChildListItem({
-    firstName,
-    lastName,
-    age,
-    activities
-}) {
+export function ChildListItem(props) {
+    const { firstName, lastName, age, activities, image } = props.child;
     const classes = useStyles();
 
     return (
@@ -40,7 +36,7 @@ export function ChildListItem({
             <Card className={classes.root}>
                 <CardMedia
                     className={classes.media}
-                    image={Lucas}
+                    image={image || "https://via.placeholder.com/150"}
                     title={firstName}
                 />
                 <CardActionArea>

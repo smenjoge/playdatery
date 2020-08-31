@@ -70,12 +70,18 @@ module.exports = {
     // Update input child's document. Please note child document is found using mongoDB _id
     updateChild: function(req, res) {
         db.Child
-        .findOneAndUpdate({ _id: req.body._id }, {firstName: req.body.firstName, lastName: req.body.lastName, activities: req.body.activities})
+        .findOneAndUpdate({ _id: req.body._id }, {firstName: req.body.firstName, lastName: req.body.lastName, activities: req.body.activities}, { new: true })
         .then(() => db.User
                     .findOne({uid: req.params.userId})
                     .populate("children")
                     .then(dbUser => res.json(dbUser))
                     .catch(err => res.status(422).json(err)))
+        .catch(err => res.status(422).json(err));
+    },
+    updateChildImage: function(req, res) {
+        db.Child
+        .findOneAndUpdate({ _id: req.params.childId }, {image: req.body.imageURL}, { new: true })
+        .then(dbChild => res.json(dbChild))
         .catch(err => res.status(422).json(err));
     }
 };

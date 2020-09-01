@@ -3,7 +3,7 @@ import Carousel from 'nuka-carousel';
 import pic1 from './marisa-howenstine-Cq9slNxV8YU-unsplash.jpg';
 import pic2 from './shirota-yuri-p0hDztR46cw-unsplash.jpg';
 import pic3 from './alexander-dummer-UH-xs-FizTk-unsplash.jpg';
-import './carousel.css';
+// import './carousel.css';
 
 
 // React.PropTypes.oneOf(['first', 'current', 'max'])

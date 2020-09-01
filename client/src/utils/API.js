@@ -9,9 +9,9 @@ export default {
     searchChildren: async function (uid) {
         return await axios.get("/api/users/" + uid + "/search/");
     },
-    // Save a User to the database
-    createNewUser: async function (user) {
-        return await axios.post("/api/users/", user);
+    // Save a User to the database -- DO NOT ADD async await to this function. 
+    createNewUser: function (user) {
+        return axios.post("/api/users/", user);
     },
     // Update a user to the database
     updateUser: async function (updateUser, uid) {
@@ -33,6 +33,20 @@ export default {
     //Get upcoming events
     getEvents: async function () {
         return await axios.get("/api/events");
+    },
+    // Upload image to S3 bucket 
+    // This route returns the URL where the file will be actually uploaded and also returns the URL to the image file
+    signIntoS3: async function (imageInfo) {
+        return await axios.post("/api/image/", imageInfo);
+    },
+    uploadImageS3: async function (URL, imageFile, options) {
+        return await axios.put(URL, imageFile, options);
+    },
+    updateChildImage : async function (childId, imageURL) {
+        let body = {
+            imageURL
+        }
+        return await axios.put("/api/users/child/" + childId, body);
     }
 }
 

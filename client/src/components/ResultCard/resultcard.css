@@ -1,4 +1,8 @@
   .homeResults {
-    column-count: 3;
-    column-gap: 10px;
+    column-count: 4;
+    column-gap: 50px;
+    margin-bottom: 250px;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
 }

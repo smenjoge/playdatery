@@ -1,5 +1,6 @@
 module.exports = {
     User: require("./user"),
-    Child: require("./child")
+    Child: require("./child"),
+    Event: require("./event")
   };
   

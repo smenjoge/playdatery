@@ -3,8 +3,14 @@ const Schema = mongoose.Schema;
 
 const EventSchema = new Schema({
     Date: String,
+    children: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "Child"
+        }
+      ]
 })
 
-    const Event = mongoose.model("Event", EventSchema);
+const Event = mongoose.model("Event", EventSchema);
 
-    module.exports = Event;
+module.exports = Event;

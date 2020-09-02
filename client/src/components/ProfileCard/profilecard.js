@@ -10,6 +10,7 @@ import UserModal from "../Modal/userModal";
 import ChildModal from "../Modal/childModal";
 import UserContext from "../../utils/userContext";
 
+
 const useStyles = makeStyles({
     root: {
         maxWidth: 345,
@@ -17,11 +18,14 @@ const useStyles = makeStyles({
     },
     media: {
         height: 300,
+    },
+    container: {
+        paddingLeft: 20,
     }
 });
 
 function profileCard(props) {
-    const { updateUser,  addChild } = props;
+    const { updateUser, addChild } = props;
 
     const { userState } = useContext(UserContext);
     const { user } = userState;
@@ -29,7 +33,7 @@ function profileCard(props) {
     console.log(`User on profile page:`, user);
 
     return (
-        <div>
+        <div className={classes.container}>
             <Card className={classes.root}>
                 <CardActionArea>
                     <CardMedia
@@ -66,7 +70,7 @@ function profileCard(props) {
                     </UserModal>
                     <ChildModal
                         saveChild={addChild}
-                        childValues={{_id: "", firstName : "", lastName : "", age : "", activities : ""}} // Sending spaces for child fields from Add action
+                        childValues={{ _id: "", firstName: "", lastName: "", age: "", activities: "" }} // Sending spaces for child fields from Add action
                     >
                         Add Child
                     </ChildModal>

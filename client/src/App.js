@@ -10,7 +10,6 @@ import PublicHome from "./pages/publicHome"
 import UserContext from "./utils/userContext";
 import API from "./utils/API";
 import Footer from "./components/Footer/footer";
-import "./app.css";
 
 function App() {
   const [userState, setUserState] = useState({
@@ -42,7 +41,7 @@ function App() {
       <Router>
         <Navbar />
         {!userState.user ?
-          <div className="container-app">
+          <div className="container-fluid" style={{"paddingBottom": "140px"}}>
             <Switch>
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={SignUp} />
@@ -50,7 +49,7 @@ function App() {
             </Switch>
           </div>
           :
-          <div className="container-app">
+          <div className="container-fluid" style={{"paddingBottom": "140px"}}>
             <Switch>
               <Route exact path="/home" component={Home} />
               <Route exact path="/profile" component={Profile} />

@@ -42,7 +42,9 @@ const useStyles = makeStyles((theme) => ({
     color: 'white',
     '&:hover': {
       background: "#2fd65d",
-    }
+    },
+    marginRight: '5px',
+    float: 'right',
   }
 }));
 
@@ -94,41 +96,53 @@ function UserModal(props) {
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <form>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="Name"
-            name="displayName"
-            value={profileState.displayName}
-            onChange={handleEdit}
-          />
+        <div className="form-group row">
+          <label class="col-sm-2 col-form-label"> Name: </label>
+          <div class="col-sm-10">
+            <input
+              type="text"
+              placeholder="Name"
+              name="displayName"
+              value={profileState.displayName}
+              onChange={handleEdit}
+            />
+          </div>
         </div>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="City"
-            name="city"
-            value={profileState.address.city}
-            onChange={handleEdit}
-          />
+        <div className="form-group row">
+          <label class="col-sm-2 col-form-label"> City: </label>
+          <div class="col-sm-10">
+            <input
+              type="text"
+              placeholder="City"
+              name="city"
+              value={profileState.address.city}
+              onChange={handleEdit}
+            />
+          </div>
         </div>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="state"
-            name="state"
-            value={profileState.address.state}
-            onChange={handleEdit}
-          />
+        <div className="form-group row">
+          <label class="col-sm-2 col-form-label"> State: </label>
+          <div class="col-sm-10">
+            <input
+              type="text"
+              placeholder="state"
+              name="state"
+              value={profileState.address.state}
+              onChange={handleEdit}
+            />
+          </div>
         </div>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="zip"
-            name="zip"
-            value={profileState.address.zip}
-            onChange={handleEdit}
-          />
+        <div className="form-group row">
+          <label class="col-sm-2 col-form-label"> Zip: </label>
+          <div class="col-sm-10">
+            <input
+              type="text"
+              placeholder="zip"
+              name="zip"
+              value={profileState.address.zip}
+              onChange={handleEdit}
+            />
+          </div>
         </div>
         <Button className={classes.button} onClick={handleSubmit}>
           Save

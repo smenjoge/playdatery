@@ -4,14 +4,13 @@ const Schema = mongoose.Schema;
 
 // Defining methods for the eventController
 module.exports = {
-    // Find user/Parent for input firebase uid and return parent and child info for Profile page
-    findEvent: function(req, res) {
-        let userID = req.body.user;
-        db.User
-        .find({uid: userID})
-        .populate("playdate")
-        .then(dbUser => res.json(dbUser))
-        .catch(err => res.status(422).json(err));
+    // Get details of the input event ID
+    getEventInfo: function(req, res) {
+        let eventID = req.params.eventId;
+        db.Event
+        .find({_id: eventID})
+        .populate("children")
+        .then(dbEvent => res.json(dbEvent))
     },
     // Create a new Event document
     create: function(req, res) {
@@ -25,15 +24,5 @@ module.exports = {
                             .then(dbUser => res.json(dbUser))
                             .catch(err => res.status(422).json(err)))
           .catch(err => res.status(422).json(err));
-    },
-    // Update input Event's details such as date or time etc 
-    // updateEvent: function(req, res) {
-    //     console.log(req.params.userId);
-    //     console.log(req.body);
-    //     db.User
-    //       .findOneAndUpdate({uid: req.params.userId}, {displayName: req.body.displayName, address: req.body.address }, { new: true })
-    //       .populate("children")
-    //       .then(dbUser => res.json(dbUser))
-    //       .catch(err => res.status(422).json(err));
-    // }
+    }
 };

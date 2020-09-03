@@ -72,6 +72,7 @@ function Profile() {
   // Upload Image
   async function uploadImage(imageFile, ID, imageFor) {
     try {
+      console.log(`uploadImage: `, imageFor)
       let fileParts = imageFile.name.split('.');
       let fileName = fileParts[0];
       let fileType = fileParts[1];
@@ -92,10 +93,11 @@ function Profile() {
       };
 
       const result = await API.uploadImageS3(signedRequest, imageFile, options)
-
+      console.log(`updateImage: `, imageFor)
       const res = await API.updateImage(ID, url, imageFor)
+      console.log(`Response from backend for updateImage: `, res.data);
 
-      return { success: true, url: url }
+      return { success: true, url: url, user: res.data }
     } catch (e) {
       console.log(e)
       return { success:false, url: null}

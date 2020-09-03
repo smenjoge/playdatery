@@ -30,10 +30,6 @@ export default {
     updateChild: async function (childObj, uid) {
         return await axios.put("/api/users/" + uid + "/child/", childObj)
     },
-    //Get upcoming events
-    getEvents: async function () {
-        return await axios.get("/api/events");
-    },
     // Upload image to S3 bucket 
     // This route returns the URL where the file will be actually uploaded and also returns the URL to the image file
     signIntoS3: async function (imageInfo) {
@@ -43,14 +39,22 @@ export default {
         return await axios.put(URL, imageFile, options);
     },
     updateImage : async function (ID, imageURL, imageFor) {
+        console.log(`API image for:`, imageFor)
         let body = {
             imageURL,
             imageFor
         }
+        console.log(`API body:`, body);
         return await axios.put("/api/users/image/" + ID, body);
     },
     setPlaydate: async function(playdate) {
         return await axios.post("/api/events", playdate);
+    },
+    findEvents : async function(user) {
+        return await axios.get("/api/users/events" + user);
+    },
+    getEventInfo : async function(playdate) {
+        return await axios.get("/api/events"+ playdate);
     }
 }
 

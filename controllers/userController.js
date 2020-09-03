@@ -70,7 +70,7 @@ module.exports = {
     // Update input child's document. Please note child document is found using mongoDB _id
     updateChild: function(req, res) {
         db.Child
-        .findOneAndUpdate({ _id: req.body._id }, {firstName: req.body.firstName, lastName: req.body.lastName, activities: req.body.activities}, { new: true })
+        .findOneAndUpdate({ _id: req.body._id }, {firstName: req.body.firstName, lastName: req.body.lastName, age: req.body.age, activities: req.body.activities}, { new: true })
         .then(() => db.User
                     .findOne({uid: req.params.userId})
                     .populate("children")
@@ -80,6 +80,7 @@ module.exports = {
     },
     updateImage: function(req, res) {
         let {imageURL, imageFor} = req.body
+        console.log(`Updating image for:`, imageFor)
         if (imageFor === "child") {
             db.Child
             .findOneAndUpdate({ _id: req.params.ID }, {image: imageURL}, { new: true })
@@ -92,5 +93,14 @@ module.exports = {
             .then(dbUser => res.json(dbUser))
             .catch(err => res.status(422).json(err));
         }
+    },
+    // Get all events for the input user/Parent
+    findEvents: function(req, res) {
+        let userID = req.params.userId;
+        console.log(`User events input:`, userID )
+        db.User
+        .find({uid: userID})
+        .then(resp => res.json(resp[0].playdate))
+        .catch(err => res.status(422).json(err));
     }
 };

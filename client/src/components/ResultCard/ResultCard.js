@@ -5,7 +5,7 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import './style.css';
+import "./resultcard.css";
 
 const useStyles = makeStyles({
     root: {
@@ -48,7 +48,7 @@ export function ChildListItem(props) {
                     {/* <Button className={classes.button}>
                         Schedule Playdate
                     </Button> */}
-                    <DateModal />
+                    {/* <DateModal /> */}
                    
                    
                 </CardActionArea>

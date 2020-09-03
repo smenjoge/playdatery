@@ -49,8 +49,8 @@ export default {
         }
         return await axios.put("/api/users/image/" + ID, body);
     },
-    setPlaydate: async function(playdate, uid) {
-        return await axios.post("/api/events" + uid, playdate);
+    setPlaydate: async function(playdate) {
+        return await axios.post("/api/events", playdate);
     }
 }
 

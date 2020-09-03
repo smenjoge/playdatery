@@ -38,8 +38,7 @@ export default {
     uploadImageS3: async function (URL, imageFile, options) {
         return await axios.put(URL, imageFile, options);
     },
-    updateImage : async function (ID, imageURL, imageFor) {
-        console.log(`API image for:`, imageFor)
+    updateImage: async function (ID, imageURL, imageFor) {
         let body = {
             imageURL,
             imageFor
@@ -47,7 +46,7 @@ export default {
         console.log(`API body:`, body);
         return await axios.put("/api/users/image/" + ID, body);
     },
-    setPlaydate: async function(playdate) {
+    setPlaydate: async function (playdate) {
         return await axios.post("/api/events", playdate);
     },
     findEvents : async function(user) {

@@ -11,17 +11,21 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     button: {
-        background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+        background: 'rgba(34,133,195,1)',
         fontWeight: 'bolder',
         color: 'white',
         marginTop: 20,
+        color: 'white',
+        '&:hover': {
+            background: "#2fd65d",
+        }
     }
 }));
 
 function SignUpForm(props) {
     const { displayName, email, password, password2, handleInputChange, handleBtnSubmit } = props;
     const classes = useStyles();
-    
+
     return (
         <form className={classes.root} noValidate autoComplete="off">
             <div>

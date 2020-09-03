@@ -1,8 +1,30 @@
   .homeResults {
     column-count: 4;
     column-gap: 50px;
+    margin-top: 20px;
     margin-bottom: 250px;
-    -webkit-column-break-inside: avoid;
-    page-break-inside: avoid;
-    break-inside: avoid;
+    font-family: 'Grandstander', cursive;
+}
+
+.resultCard {
+  max-width: 345;
+  margin-bottom: 20px;
+}
+
+.media {
+  height: 200px;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.homeResults h2, 
+p {
+  color: black;
+  font-family: 'Grandstander', cursive;
+}
+
+#font {
+  margin-left: 10px;
+  font-family: 'Grandstander', cursive;
 }

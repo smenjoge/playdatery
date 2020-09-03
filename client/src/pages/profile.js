@@ -106,7 +106,7 @@ function Profile() {
 
   return (
     <div className="backImg">
-      <div className="container">
+      <div className="profileContainer">
         <ProfileCard
           updateUser={updateUser}
           addChild={addChild}

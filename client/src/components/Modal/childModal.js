@@ -32,12 +32,15 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 50,
   },
   media: {
-      height: 300,
+    height: 300,
   },
   button: {
-      background: 'rgba(34,133,195,1)',
-      fontWeight: 'bolder',
-      color: 'white',
+    background: 'rgba(34,133,195,1)',
+    fontWeight: 'bolder',
+    color: 'white',
+    '&:hover': {
+      background: "#2fd65d",
+    }
   }
 }));
 
@@ -49,18 +52,18 @@ function childModal(props) {
   const [open, setOpen] = useState(false);
 
   const [childState, setChildState] = useState({
-    _id : childValues._id,
-    firstName: childValues.firstName ,
-    lastName:  childValues.lastName,
+    _id: childValues._id,
+    firstName: childValues.firstName,
+    lastName: childValues.lastName,
     age: childValues.age,
     activities: childValues.activities
   });
 
   function setDefaultChildState() {
     setChildState({
-      _id : childValues._id,
-      firstName: childValues.firstName ,
-      lastName:  childValues.lastName,
+      _id: childValues._id,
+      firstName: childValues.firstName,
+      lastName: childValues.lastName,
       age: childValues.age,
       activities: childValues.activities
     });
@@ -90,46 +93,46 @@ function childModal(props) {
     <div style={modalStyle} className={classes.paper}>
       <form>
         <div className="form-group">
-            <input
-                type="text"
-                placeholder="First Name"
-                name="firstName"
-                value={childState.firstName}
-                onChange={handleEdit}
-            />
+          <input
+            type="text"
+            placeholder="First Name"
+            name="firstName"
+            value={childState.firstName}
+            onChange={handleEdit}
+          />
         </div>
         <div className="form-group">
-            <input
-                type="text"
-                placeholder="Last Name"
-                name="lastName"
-                value={childState.lastName}
-                onChange={handleEdit}
-            />
+          <input
+            type="text"
+            placeholder="Last Name"
+            name="lastName"
+            value={childState.lastName}
+            onChange={handleEdit}
+          />
         </div>
         <div className="form-group">
-            <input
-                type="text"
-                placeholder="Age"
-                name="age"
-                value={childState.age}
-                onChange={handleEdit}
-            />
+          <input
+            type="text"
+            placeholder="Age"
+            name="age"
+            value={childState.age}
+            onChange={handleEdit}
+          />
         </div>
         <div className="form-group">
-            <input
-                type="text"
-                placeholder="Activities"
-                name="activities"
-                value={childState.activities}
-                onChange={handleEdit}
-            />
+          <input
+            type="text"
+            placeholder="Activities"
+            name="activities"
+            value={childState.activities}
+            onChange={handleEdit}
+          />
         </div>
         <Button className={classes.button} onClick={handleSubmit}>
-            Save
+          Save
         </Button>
         <Button className={classes.button} onClick={handleClose}>
-            Close
+          Close
         </Button>
       </form>
     </div>

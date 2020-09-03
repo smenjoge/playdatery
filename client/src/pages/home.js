@@ -14,16 +14,17 @@ function Home() {
 
     const [child, setChild] = useState([])
     const [childSearch, setChildSearch] = useState("");
+    const [date, setDate] = useState("");
 
     // Load any upcoming events
     useEffect(() => {
         API.searchChildren(user.uid)
-        .then(res => {
-            console.log(res.data)
-            resultsAll = res.data; 
-            setChild(resultsAll)
-        })
-        .catch(err => console.log(err));
+            .then(res => {
+                console.log(res.data)
+                resultsAll = res.data;
+                setChild(resultsAll)
+            })
+            .catch(err => console.log(err));
         loadEvents()
     }, [])
 
@@ -35,9 +36,6 @@ function Home() {
 
     //Search for child
     function handleInputChange(event) {
-        // const { name, value } = event.target;
-        // setSearch({ ...formObject, [name]: value })
-        // console.log(search);
         const { value } = event.target;
         let searchInput = "";
         if (value.length > 0 && value !== " ") {
@@ -50,17 +48,17 @@ function Home() {
 
     function handleSearchChild(event) {
         event.preventDefault();
-        
+
         let searchTerm = childSearch.toLowerCase();
         let filterResults = [];
         if (childSearch !== "") {
-            filterResults = resultsAll.filter(child => 
+            filterResults = resultsAll.filter(child =>
                 child.firstName.toLowerCase().includes(searchTerm) ||
                 child.lastName.toLowerCase().includes(searchTerm) ||
                 child.activities.toLowerCase().includes(searchTerm) ||
                 child.parent.address.city.toLowerCase().includes(searchTerm) ||
                 child.parent.address.state.toLowerCase().includes(searchTerm) ||
-                child.parent.address.zip.toLowerCase().includes(searchTerm) 
+                child.parent.address.zip.toLowerCase().includes(searchTerm)
             )
         } else {
             filterResults = resultsAll
@@ -68,15 +66,17 @@ function Home() {
         setChild(filterResults)
     };
 
+
+
     return (
-       <div>
+        <div>
             <h2>Welcome {user.displayName}</h2>
             <Grid container justify="center">
                 <SearchForm
                     handleInputChange={handleInputChange}
-                    handleSearchChild={handleSearchChild} 
+                    handleSearchChild={handleSearchChild}
                 />
-                <Grid container justify="center">
+                <Grid container justify="center" >
                     {!child.length ? (
                         <h2>No results found</h2>
                     ) : (

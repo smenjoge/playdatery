@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import UserContext from "../../utils/userContext";
+import './style.css';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -39,8 +40,12 @@ const useStyles = makeStyles((theme) => ({
     background: 'rgba(34,133,195,1)',
     fontWeight: 'bolder',
     color: 'white',
+    '&:hover': {
+      background: "#2fd65d",
+    }
   }
 }));
+
 
 function UserModal(props) {
   const { updateUser } = props;

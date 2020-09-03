@@ -12,6 +12,7 @@ import UserModal from "../Modal/userModal";
 import ChildModal from "../Modal/childModal";
 import UserContext from "../../utils/userContext";
 
+
 const useStyles = makeStyles({
     root: {
         maxWidth: 675,
@@ -85,7 +86,7 @@ function profileCard(props) {
     }
 
     return (
-        <div>
+        <div className={classes.container}>
             <Card className={classes.root}>
                 <CardActionArea className={classes.details}>
                     <Box className={classes.media}>
@@ -124,7 +125,7 @@ function profileCard(props) {
                     </UserModal>
                     <ChildModal
                         saveChild={addChild}
-                        childValues={{_id: "", firstName : "", lastName : "", age : "", activities : ""}} // Sending spaces for child fields from Add action
+                        childValues={{ _id: "", firstName: "", lastName: "", age: "", activities: "" }} // Sending spaces for child fields from Add action
                     >
                         Add Child
                     </ChildModal>

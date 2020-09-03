@@ -38,6 +38,12 @@ const UserSchema = new Schema({
       ref: "Child"
     }
   ],
+  playdate: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Event"
+    }
+  ],
   date: { type: Date, default: Date.now }
 });
 

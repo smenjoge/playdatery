@@ -30,8 +30,8 @@ function SearchAppBar() {
   };
 
   return (
-    <div>
-      <AppBar position="static" className="root">
+
+      <AppBar position="static" className="AppBar">
         <Toolbar>
 
           <MoreVertIcon aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
@@ -76,7 +76,7 @@ function SearchAppBar() {
 
         </Toolbar>
       </AppBar>
-    </div>
+
   );
 }
 

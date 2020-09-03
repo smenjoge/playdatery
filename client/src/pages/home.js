@@ -4,17 +4,22 @@ import SearchForm from '../components/SearchForm/SearchForm';
 import API from "../utils/API";
 import { ResultCard, ChildListItem } from "../components/ResultCard/ResultCard";
 import Grid from '@material-ui/core/Grid';
+import Alert from '../components/Alert/alert';
 import "./style/home.css";
+
 
 let resultsAll = [];
 
 function Home() {
+
     const { userState } = useContext(UserContext);
     const { user } = userState;
 
     const [child, setChild] = useState([])
     const [childSearch, setChildSearch] = useState("");
-    const [date, setDate] = useState("");
+    const [alertSuccess, setAlertSuccess] = useState();
+
+    // const [date, setDate] = useState("");
 
     // Load any upcoming events
     useEffect(() => {
@@ -25,14 +30,14 @@ function Home() {
                 setChild(resultsAll)
             })
             .catch(err => console.log(err));
-        loadEvents()
+        // loadEvents()
     }, [])
 
-    function loadEvents() {
-        API.getEvents()
-            .then(console.log("Upcoming Events"))
-            .catch(err => console.log(err));
-    };
+    // function loadEvents() {
+    //     API.getEvents()
+    //         .then(console.log("Upcoming Events"))
+    //         .catch(err => console.log(err));
+    // };
 
     //Search for child
     function handleInputChange(event) {
@@ -66,11 +71,49 @@ function Home() {
         setChild(filterResults)
     };
 
+    function schedulePlaydate(formObject, child1, child2, parent2ID) {
+
+        //will create playdate for 1st child
+
+        if (formObject.date && formObject.child) {
+            let eventObj = {
+                event: {
+                    Date: formObject.date,
+                    children: [
+                        child1,
+                        child2
+                    ]
+                },
+                parent1: user._id,
+                parent2: parent2ID
+            };
+
+            console.log(eventObj);
+
+            API.setPlaydate(eventObj)
+                .then((res) => {
+                    console.log(`Playdate Scheduled: `, res.data);
+                    // alert('Success');
+                    setAlertSuccess(true);
+                })
+
+                .catch(error => {
+                    console.log(error)
+                })
+        }
+
+    }
 
 
     return (
-        <div>
+        <div className="homeImg">
+             {alertSuccess ? 
+            <Alert /> : null}
+            
             <h2>Welcome {user.displayName}</h2>
+
+           
+
             <Grid container justify="center">
                 <SearchForm
                     handleInputChange={handleInputChange}
@@ -86,6 +129,7 @@ function Home() {
                                         <ChildListItem
                                             key={child._id}
                                             child={child}
+                                            schedulePlaydate={schedulePlaydate}
                                         />
                                     );
                                 })}

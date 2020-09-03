@@ -46,7 +46,9 @@ function LoginForm(props) {
                             Login
                     </button>
                     </Grid>
-                    <p>Or sign up <a href="/signup" style={{color: "rgba(34,133,195,1)"}}>here</a></p>
+                    <Grid container justify="center" >
+                        <p style={{ color: 'black' }}>Or sign up <a href="/signup" style={{ color: "rgba(34,133,195,1)" }}>here</a></p>
+                    </Grid>
                 </form>
                 <br />
 

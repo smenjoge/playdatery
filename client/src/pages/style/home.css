@@ -1,5 +1,11 @@
 h2 {
     text-align: center;
-    margin: 45px 0;
+    padding: 45px 0;
 }
 
+
+.homeImg {
+    background-image: url("../../assets/baby-Shark.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}

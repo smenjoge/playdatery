@@ -33,6 +33,14 @@ const useStyles = makeStyles({
     buttons: {
         float: "right",
     },
+    delete: {
+        background: 'rgba(34,133,195,1)',
+        fontWeight: 'bolder',
+        color: 'white',
+        '&:hover': {
+            background: "red",
+          }
+    },
     table: {
         fontWeight: "bolder",
         fontSize: "large",
@@ -92,15 +100,7 @@ function ChildCard(props) {
 
     return (
         <Card className={classes.root}>
-            <CardActions className={classes.buttons}>
-                <ChildModal
-                    saveChild={updateChild}
-                    childValues={props.child}
-                >
-                    Edit
-                </ChildModal>
-                <Button className={classes.button} onClick={() => deleteChild(_id)}>Delete</Button>
-            </CardActions>
+           
             <CardActionArea className={classes.details}>
                 <Box className={classes.media}>
                     {imageUpld.upload ? (imageUpld.success ? <Successmsg /> : <Failuremsg />) : null}
@@ -131,6 +131,15 @@ function ChildCard(props) {
                     </TableRow>
                 </CardContent>
             </CardActionArea>
+            <CardActions className={classes.buttons}>
+                <ChildModal
+                    saveChild={updateChild}
+                    childValues={props.child}
+                >
+                    Update
+                </ChildModal>
+                <Button className={classes.delete} onClick={() => deleteChild(_id)}>Delete</Button>
+            </CardActions>
         </Card>
     );
 }

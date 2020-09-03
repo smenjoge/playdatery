@@ -30,6 +30,7 @@ const useStyles = makeStyles({
     details: {
         display: 'flex',
         marginTop: 50,
+        color: 'black',
     },
     buttons: {
         float: "right",
@@ -95,6 +96,7 @@ function profileCard(props) {
 
     return (
         <div className={classes.container}>
+            <h2>{user.displayName}'s Profile</h2>
             <Card className={classes.root}>
                 <CardActionArea className={classes.details}>
                     <Box className={classes.media}>
@@ -142,7 +144,7 @@ function profileCard(props) {
                     <UserModal
                         updateUser={updateUser}
                     >
-                        Edit
+                        Update
                     </UserModal>
                     <ChildModal
                         saveChild={addChild}

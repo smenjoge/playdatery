@@ -39,6 +39,11 @@
   word-spacing: 5px;
 }
 
+.content
+p {
+  color: black;
+}
+
 #testimonial {
     margin-right: 50px;
 }

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import ChildCard from "../ChildCard";
+import Grid from '@material-ui/core/Grid';
 import UserContext from "../../utils/userContext";
 
 function ChildList(props) {
@@ -12,14 +13,14 @@ function ChildList(props) {
             <ul className="list-group mt-2">
                 {user.children.map(child =>
                     <li key={child._id}>
-                        <div className="container">
+                       <Grid container justify="center">
                             <ChildCard
                                 child={child}
                                 updateChild={updateChild}
                                 deleteChild={deleteChild}
                                 uploadImage={uploadImage}
                             />
-                        </div>
+                        </Grid>
                     </li>
                 )
                 }

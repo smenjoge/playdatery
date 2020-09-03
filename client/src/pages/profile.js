@@ -3,23 +3,25 @@ import API from "../utils/API";
 import ProfileCard from "../components/ProfileCard/profilecard";
 import ChildList from "../components/ChildList"
 import UserContext from "../utils/userContext";
+import "./style/profile.css";
 
 function Profile() {
   const { userState, setUserState } = useContext(UserContext);
   const { user } = userState;
   console.log(`User Context`, user);
 
+
   function updateUser(userInfo) {
-    console.log(`Updating User Info: `, userInfo );
+    console.log(`Updating User Info: `, userInfo);
 
     API.updateUser(userInfo, user.uid)
-    .then((res) => {
-      console.log(`User Info Updated: `, res);
-      setUserState({ ...userState, user: res.data })
-    })
-    .catch(error => {
-      console.log(error)
-    })
+      .then((res) => {
+        console.log(`User Info Updated: `, res);
+        setUserState({ ...userState, user: res.data })
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 
   //Child functions
@@ -34,53 +36,90 @@ function Profile() {
     }
 
     API.addChild(childInfoAdd, user.uid)
-    .then((res) => {
-      console.log(`Child Added successfully: `, res.data);
-      setUserState({ ...userState, user: res.data })
-    })
-    .catch(error => {
-      console.log(error)
-    })
+      .then((res) => {
+        console.log(`Child Added successfully: `, res.data);
+        setUserState({ ...userState, user: res.data })
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
-  
+
   function updateChild(childInfo) {
     console.log(`Updating child:`, childInfo);
     API.updateChild(childInfo, user.uid)
-    .then((res) => {
-      console.log(`Child Updated successfully: `, res.data);
-      setUserState({ ...userState, user: res.data })
-    })
-    .catch(error => {
-      console.log(error)
-    })
+      .then((res) => {
+        console.log(`Child Updated successfully: `, res.data);
+        setUserState({ ...userState, user: res.data })
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 
   function deleteChild(childId) {
     console.log(`Removing child:`, childId);
     API.removeChild(childId, user.uid)
-    .then((res) => {
-      console.log(`Child Deleted successfully: `, res.data);
-      setUserState({ ...userState, user: res.data })
-    })
-    .catch(error => {
-      console.log(error.response)
-    })
+      .then((res) => {
+        console.log(`Child Deleted successfully: `, res.data);
+        setUserState({ ...userState, user: res.data })
+      })
+      .catch(error => {
+        console.log(error.response)
+      })
+  }
+
+  // Upload Image
+  async function uploadImage(imageFile, ID, imageFor) {
+    try {
+      let fileParts = imageFile.name.split('.');
+      let fileName = fileParts[0];
+      let fileType = fileParts[1];
+      
+      const response = await API.signIntoS3({
+        fileName: fileName,
+        fileType: fileType
+      })
+
+      var returnData = response.data.data.returnData;
+      var signedRequest = returnData.signedRequest;
+      var url = returnData.url;
+      // Put the fileType in the headers for the upload
+      var options = {
+        headers: {
+          'Content-Type': fileType
+        }
+      };
+
+      const result = await API.uploadImageS3(signedRequest, imageFile, options)
+
+      const res = await API.updateImage(ID, url, imageFor)
+
+      return { success: true, url: url }
+    } catch (e) {
+      console.log(e)
+      return { success:false, url: null}
+    }
   }
 
   return (
-    <div>
-      <ProfileCard
-        updateUser={updateUser}
-        addChild={addChild}
-      />
-      {user.children ? 
-        <ChildList 
-          updateChild={updateChild}
-          deleteChild={deleteChild}
+    <div className="backImg">
+      <div className="container">
+        <ProfileCard
+          updateUser={updateUser}
+          addChild={addChild}
+          uploadImage={uploadImage}
         />
-      :
-        <div></div>
-      }
+        {user.children ?
+          <ChildList
+            updateChild={updateChild}
+            deleteChild={deleteChild}
+            uploadImage={uploadImage}
+          />
+          :
+          <div></div>
+        }
+      </div>
     </div>
   )
 }

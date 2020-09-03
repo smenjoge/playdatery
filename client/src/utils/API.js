@@ -42,14 +42,15 @@ export default {
     uploadImageS3: async function (URL, imageFile, options) {
         return await axios.put(URL, imageFile, options);
     },
-    updateChildImage : async function (childId, imageURL) {
+    updateImage : async function (ID, imageURL, imageFor) {
         let body = {
-            imageURL
+            imageURL,
+            imageFor
         }
-        return await axios.put("/api/users/child/" + childId, body);
+        return await axios.put("/api/users/image/" + ID, body);
     },
-    setPlaydate: async function(playdate, uid) {
-        return await axios.post("/api/events" + uid, playdate);
+    setPlaydate: async function(playdate) {
+        return await axios.post("/api/events", playdate);
     }
 }
 

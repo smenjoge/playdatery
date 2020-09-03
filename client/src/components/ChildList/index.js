@@ -8,10 +8,10 @@ function ChildList(props) {
     const { user } = userState;
 
     return (
-        <div className={user.children.length > 0 ? "container border border-grey my-4" : "container border border-grey mt-4 invisible"} >
+        <div className={user.children.length > 0 ? "container mt-4" : "container mt-4 invisible"} >
             <ul className="list-group mt-2">
                 {user.children.map(child =>
-                    <li className="list-group-item" key={child._id}>
+                    <li key={child._id}>
                         <div className="container">
                             <ChildCard
                                 child={child}

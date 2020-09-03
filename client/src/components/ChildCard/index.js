@@ -6,7 +6,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
 import Box from '@material-ui/core/Box';
 import ChildModal from "../Modal/childModal";
 
@@ -14,6 +15,7 @@ const useStyles = makeStyles({
     root: {
         maxWidth: 675,
         marginTop: 50,
+        textAlign: "-webkit-center",
     },
     media: {
         marginTop: 10,
@@ -30,6 +32,10 @@ const useStyles = makeStyles({
     },
     buttons: {
         float: "right",
+    },
+    table: {
+        fontWeight: "bolder",
+        fontSize: "large",
     }
 });
 
@@ -58,12 +64,11 @@ function ChildCard(props) {
             <input
                 accept="image/*"
                 style={{ display: "none" }}
-                id="contained-button-file"
-                multiple
+                id={_id}
                 type="file"
                 onChange={(e) => handleChange(e)}
             />
-            <label htmlFor="contained-button-file">
+            <label htmlFor={_id}>
                 <Button color="primary" component="span">
                     Upload
             </Button>
@@ -72,16 +77,17 @@ function ChildCard(props) {
     );
 
     async function handleChange(event) {
+        console.log(`Child Image upload starting`)
         let file = event.target.files[0];
         uploadImage(file, _id, "child")
-        .then (resp => {
-        console.log(`response from image upload: `, resp)
-        if (resp.success) {
-            setImageUpld({ upload: true, success: true, url: resp.url })
-        } else {
-            setImageUpld({ ...imageUpld, upload: true, success: false })
-        }
-        })
+            .then(resp => {
+                console.log(`response from Child image upload: `, resp)
+                if (resp.success) {
+                    setImageUpld({ upload: true, success: true, url: resp.url })
+                } else {
+                    setImageUpld({ ...imageUpld, upload: true, success: false })
+                }
+            })
     }
 
     return (
@@ -97,7 +103,7 @@ function ChildCard(props) {
             </CardActions>
             <CardActionArea className={classes.details}>
                 <Box className={classes.media}>
-                    {imageUpld.upload ? (imageUpld.success ? <Successmsg /> : <Failuremsg /> ) : null}
+                    {imageUpld.upload ? (imageUpld.success ? <Successmsg /> : <Failuremsg />) : null}
                     <CardMedia
                         component="img"
                         image={imageUpld.url}
@@ -105,15 +111,24 @@ function ChildCard(props) {
                     <Upload />
                 </Box>
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        Name: {firstName} {lastName}
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        Age: {age} 
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        Hobbies: {activities}
-                    </Typography>
+                    <TableRow key="Name">
+                        <TableCell component="th" scope="row" className={classes.table} >
+                            Name:
+                            </TableCell>
+                        <TableCell align="left">{firstName} {lastName}</TableCell>
+                    </TableRow>
+                    <TableRow key="Age">
+                        <TableCell component="th" scope="row" className={classes.table} >
+                            Age:
+                            </TableCell>
+                        <TableCell align="left">{age}</TableCell>
+                    </TableRow>
+                    <TableRow key="Hobbies">
+                        <TableCell component="th" scope="row" className={classes.table} >
+                            Hobbies:
+                            </TableCell>
+                        <TableCell align="left">{activities}</TableCell>
+                    </TableRow>
                 </CardContent>
             </CardActionArea>
         </Card>

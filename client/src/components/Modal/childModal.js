@@ -40,7 +40,9 @@ const useStyles = makeStyles((theme) => ({
     color: 'white',
     '&:hover': {
       background: "#2fd65d",
-    }
+    },
+    marginRight: '5px',
+    float: 'right',
   }
 }));
 
@@ -92,41 +94,53 @@ function childModal(props) {
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <form>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="First Name"
-            name="firstName"
-            value={childState.firstName}
-            onChange={handleEdit}
-          />
+        <div className="form-group row">
+          <label class="col-sm-4 col-form-label"> First Name: </label>
+          <div class="col-sm-8">
+            <input
+              type="text"
+              placeholder="First Name"
+              name="firstName"
+              value={childState.firstName}
+              onChange={handleEdit}
+            />
+          </div>
         </div>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="Last Name"
-            name="lastName"
-            value={childState.lastName}
-            onChange={handleEdit}
-          />
+        <div className="form-group row">
+          <label class="col-sm-4 col-form-label"> Last Name: </label>
+          <div class="col-sm-8">
+            <input
+              type="text"
+              placeholder="Last Name"
+              name="lastName"
+              value={childState.lastName}
+              onChange={handleEdit}
+            />
+          </div>
         </div>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="Age"
-            name="age"
-            value={childState.age}
-            onChange={handleEdit}
-          />
+        <div className="form-group row">
+          <label class="col-sm-4 col-form-label"> Age: </label>
+          <div class="col-sm-8">
+            <input
+              type="text"
+              placeholder="Age"
+              name="age"
+              value={childState.age}
+              onChange={handleEdit}
+            />
+          </div>
         </div>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="Activities"
-            name="activities"
-            value={childState.activities}
-            onChange={handleEdit}
-          />
+        <div className="form-group row">
+          <label class="col-sm-4 col-form-label"> Hobbies: </label>
+          <div class="col-sm-8">
+            <input
+              type="text"
+              placeholder="Activities"
+              name="activities"
+              value={childState.activities}
+              onChange={handleEdit}
+            />
+          </div>
         </div>
         <Button className={classes.button} onClick={handleSubmit}>
           Save

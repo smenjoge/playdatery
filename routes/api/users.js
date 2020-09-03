@@ -10,7 +10,6 @@ router.route("/:userId")
 router.route("/:userId/search")
   .get(userController.searchChildren) // Get List of children to display on search
 
-
 // Matches with "/api/users/:userId/child"
 router
   .route("/:userId/child")
@@ -21,6 +20,10 @@ router
 // Matches with "/api/users/image/:ID"
 router.route("/image/:ID")
   .put(userController.updateImage) // update image URL in user/child schema
+
+  // Matches with "/api/users/events"
+router.route("/events/:userId")
+  .get(userController.findEvents) // Get All events for the user 
 
 // Matches with "/api/users"
 router.route("/")

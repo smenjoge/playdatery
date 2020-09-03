@@ -6,8 +6,9 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
 import UserModal from "../Modal/userModal";
 import ChildModal from "../Modal/childModal";
 import UserContext from "../../utils/userContext";
@@ -17,6 +18,9 @@ const useStyles = makeStyles({
     root: {
         maxWidth: 675,
         // marginTop: 50,
+    },
+    container: {
+        textAlign: "-webkit-center",
     },
     media: {
         marginTop: 10,
@@ -29,13 +33,17 @@ const useStyles = makeStyles({
     },
     buttons: {
         float: "right",
+    },
+    table: {
+        fontWeight: "bolder",
+        fontSize: "large",
     }
 });
 
 function profileCard(props) {
-    const { updateUser,  addChild, uploadImage } = props;
+    const { updateUser, addChild, uploadImage } = props;
 
-    const { userState } = useContext(UserContext);
+    const { userState, setUserState } = useContext(UserContext);
     const { user } = userState;
     const classes = useStyles();
     console.log(`User on profile page:`, user);
@@ -59,12 +67,11 @@ function profileCard(props) {
             <input
                 accept="image/*"
                 style={{ display: "none" }}
-                id="contained-button-file"
-                multiple
+                id={user.uid}
                 type="file"
                 onChange={(e) => handleChange(e)}
             />
-            <label htmlFor="contained-button-file">
+            <label htmlFor={user.uid}>
                 <Button color="primary" component="span">
                     Upload
             </Button>
@@ -75,14 +82,15 @@ function profileCard(props) {
     async function handleChange(event) {
         let file = event.target.files[0];
         uploadImage(file, user.uid, "user")
-        .then (resp => {
-        console.log(`response from image upload: `, resp)
-        if (resp.success) {
-            setImageUpld({ upload: true, success: true, url: resp.url })
-        } else {
-            setImageUpld({ ...imageUpld, upload: true, success: false })
-        }
-        })
+            .then(resp => {
+                console.log(`response from User image upload: `, resp)
+                if (resp.success) {
+                    setUserState({ ...userState, user: resp.user })
+                    setImageUpld({ upload: true, success: true, url: resp.url })
+                } else {
+                    setImageUpld({ ...imageUpld, upload: true, success: false })
+                }
+            })
     }
 
     return (
@@ -90,7 +98,7 @@ function profileCard(props) {
             <Card className={classes.root}>
                 <CardActionArea className={classes.details}>
                     <Box className={classes.media}>
-                        {imageUpld.upload ? (imageUpld.success ? <Successmsg /> : <Failuremsg /> ) : null}
+                        {imageUpld.upload ? (imageUpld.success ? <Successmsg /> : <Failuremsg />) : null}
                         <CardMedia
                             component="img"
                             image={imageUpld.url}
@@ -98,23 +106,36 @@ function profileCard(props) {
                         <Upload />
                     </Box>
                     <CardContent>
-                        <Typography gutterBottom variant="h5" component="h3" >
-                            Name: {user.displayName}
-                        </Typography>
-                        <Typography>
-                            Email: {user.emailID}
-                        </Typography>
-                        <Typography>
-                            City: {(user.address && user.address.city) ? user.address.city : ""}
-                        </Typography>
-                        <Typography>
-                            State: {(user.address && user.address.state) ? user.address.state : ""}
-                        </Typography>
-                        <Typography>
-                            Zip: {(user.address && user.address.zip) ? user.address.zip : ""}
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                        </Typography>
+                        <TableRow key="Name">
+                            <TableCell component="th" scope="row" className={classes.table} >
+                                Name:
+                            </TableCell>
+                            <TableCell align="left">{user.displayName}</TableCell>
+                        </TableRow>
+                        <TableRow key="Email">
+                            <TableCell component="th" scope="row" className={classes.table} >
+                                Email:
+                            </TableCell>
+                            <TableCell align="left">{user.emailID}</TableCell>
+                        </TableRow>
+                        <TableRow key="City">
+                            <TableCell component="th" scope="row" className={classes.table} >
+                                City:
+                            </TableCell>
+                            <TableCell align="left">{(user.address && user.address.city) ? user.address.city : ""}</TableCell>
+                        </TableRow>
+                        <TableRow key="State">
+                            <TableCell component="th" scope="row" className={classes.table} >
+                                State:
+                            </TableCell>
+                            <TableCell align="left">{(user.address && user.address.state) ? user.address.state : ""}</TableCell>
+                        </TableRow>
+                        <TableRow key="Zip">
+                            <TableCell component="th" scope="row" className={classes.table} >
+                                Zip:
+                            </TableCell>
+                            <TableCell align="left">{(user.address && user.address.zip) ? user.address.zip : ""}</TableCell>
+                        </TableRow>
                     </CardContent>
                 </CardActionArea>
                 <CardActions className={classes.buttons}>

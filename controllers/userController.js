@@ -78,10 +78,19 @@ module.exports = {
                     .catch(err => res.status(422).json(err)))
         .catch(err => res.status(422).json(err));
     },
-    updateChildImage: function(req, res) {
-        db.Child
-        .findOneAndUpdate({ _id: req.params.childId }, {image: req.body.imageURL}, { new: true })
-        .then(dbChild => res.json(dbChild))
-        .catch(err => res.status(422).json(err));
+    updateImage: function(req, res) {
+        let {imageURL, imageFor} = req.body
+        if (imageFor === "child") {
+            db.Child
+            .findOneAndUpdate({ _id: req.params.ID }, {image: imageURL}, { new: true })
+            .then(dbChild => res.json(dbChild))
+            .catch(err => res.status(422).json(err));
+        } else if (imageFor === "user") {
+            db.User
+            .findOneAndUpdate({uid: req.params.ID}, {image: imageURL}, { new: true })
+            .populate("children")
+            .then(dbUser => res.json(dbUser))
+            .catch(err => res.status(422).json(err));
+        }
     }
 };

@@ -1,91 +1,92 @@
 import React, { useState } from "react";
 import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 import ChildModal from "../Modal/childModal";
-import API from "../../utils/API";
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: 345,
+        maxWidth: 675,
         marginTop: 50,
     },
     media: {
-        height: 300,
+        marginTop: 10,
+        maxWidth: "30%",
+        marginLeft: "-20%",
+    },
+    details: {
+        display: 'flex',
     },
     button: {
         background: 'rgba(34,133,195,1)',
         fontWeight: 'bolder',
         color: 'white',
+    },
+    buttons: {
+        float: "right",
     }
 });
 
 function ChildCard(props) {
     const { _id, firstName, lastName, age, activities, image } = props.child;
-    const { updateChild, deleteChild } = props;
-
-    const classes = useStyles();
+    const { updateChild, deleteChild, uploadImage } = props;
 
     const [imageUpld, setImageUpld] = useState({
+        upload: undefined,
         success: false,
         url: image || "https://via.placeholder.com/150"
     })
 
-    function handleChange(event) {
+    const classes = useStyles();
+
+    const Successmsg = () => (
+        <p style={{ color: 'green' }}>Image Uploaded Successfully.</p>
+    )
+
+    const Failuremsg = () => (
+        <p style={{ color: 'red' }}>Image Uploaded Failed.</p>
+    )
+
+    const Upload = () => (
+        <div >
+            <input
+                accept="image/*"
+                style={{ display: "none" }}
+                id="contained-button-file"
+                multiple
+                type="file"
+                onChange={(e) => handleChange(e)}
+            />
+            <label htmlFor="contained-button-file">
+                <Button color="primary" component="span">
+                    Upload
+            </Button>
+            </label>
+        </div>
+    );
+
+    async function handleChange(event) {
         let file = event.target.files[0];
-        // Split the filename to get the name and type
-        let fileParts = file.name.split('.');
-        let fileName = fileParts[0];
-        let fileType = fileParts[1];
-        console.log("Preparing the upload");
-        API.signIntoS3({
-            fileName: fileName,
-            fileType: fileType
+        uploadImage(file, _id, "child")
+        .then (resp => {
+        console.log(`response from image upload: `, resp)
+        if (resp.success) {
+            setImageUpld({ upload: true, success: true, url: resp.url })
+        } else {
+            setImageUpld({ ...imageUpld, upload: true, success: false })
+        }
         })
-            .then(response => {
-                var returnData = response.data.data.returnData;
-                var signedRequest = returnData.signedRequest;
-                var url = returnData.url;
-                console.log("Recieved a signed request " + signedRequest);
-                // Put the fileType in the headers for the upload
-                var options = {
-                    headers: {
-                        'Content-Type': fileType
-                    }
-                };
-                API.uploadImageS3(signedRequest, file, options)
-                    .then(result => {
-                        console.log(`Image uploded to S3:`, result)
-                        API.updateChildImage(_id, url)
-                            .then(res => {
-                                console.log(`Image URL saved to DB: `, res.data);
-                                setImageUpld({success: true, url : url})
-                            })
-                            .catch(error => console.log(`Error saving image URL to DB:`, error))
-                        
-                    })
-                    .catch(error => {
-                        console.log(`Error uploading image to S3:`, error);
-                    })
-            })
-            .catch(error => {
-                console.log(`Error signing into S3:`, error);
-            })
     }
 
     return (
-        <div className="card mb-3 border-0">
-            <div className="row">
-                <div className="col-md-2 my-auto">
-                    <img src={imageUpld.url} className="card-img"></img>
-                    <input type="file" className="process_upload-btn" onChange={(e) => handleChange(e)}></input>
-                </div>
-                <div className="col-md-10">
-                    <div className="card-body">
-                        <p className="card-text">Name: {firstName} {lastName} </p>
-                        <p className="card-text">Age: {age} </p>
-                        <p className="card-text">Hobbies: {activities} </p>
-                    </div>
-                </div>
+        <Card className={classes.root}>
+            <CardActions className={classes.buttons}>
                 <ChildModal
                     saveChild={updateChild}
                     childValues={props.child}
@@ -93,8 +94,29 @@ function ChildCard(props) {
                     Edit
                 </ChildModal>
                 <Button className={classes.button} onClick={() => deleteChild(_id)}>Delete</Button>
-            </div>
-        </div>
+            </CardActions>
+            <CardActionArea className={classes.details}>
+                <Box className={classes.media}>
+                    {imageUpld.upload ? (imageUpld.success ? <Successmsg /> : <Failuremsg /> ) : null}
+                    <CardMedia
+                        component="img"
+                        image={imageUpld.url}
+                    />
+                    <Upload />
+                </Box>
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                        Name: {firstName} {lastName}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                        Age: {age} 
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                        Hobbies: {activities}
+                    </Typography>
+                </CardContent>
+            </CardActionArea>
+        </Card>
     );
 }
 

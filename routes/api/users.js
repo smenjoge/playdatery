@@ -18,9 +18,9 @@ router
   .delete(userController.removeChild) // remove child from user document
   .put(userController.updateChild) // Update child document
 
-// Matches with "/api/users/child/:childId"
-router.route("/child/:childId")
-  .put(userController.updateChildImage) // update child's image URL
+// Matches with "/api/users/image/:ID"
+router.route("/image/:ID")
+  .put(userController.updateImage) // update image URL in user/child schema
 
 // Matches with "/api/users"
 router.route("/")
